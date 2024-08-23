@@ -11,11 +11,10 @@
 
 for_window [class="^.*"] border pixel 1
 
-set $mod Mod4
-# set $mod Mod1
+set $mod Mod1
 
 exec --no-startup-id picom
-exec --no-startup-id feh --bg-scale ~/backgrounds/nice-blue-background.png
+exec --no-startup-id feh --bg-scale ~/nice-blue-background.png
 exec --no-startup-id xrdb -merge ~/.Xresources
 exec_always --no-startup-id setxkbmap -option ctrl:nocaps
 
