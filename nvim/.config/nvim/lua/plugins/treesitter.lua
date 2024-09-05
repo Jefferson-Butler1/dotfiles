@@ -1,13 +1,28 @@
-return 
-  {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    config = function()
-      local config = require("nvim-treesitter.configs")
-      config.setup({
-        ensure_installed = { "lua", "javascript", "typescript" },
-        highlight = { enable = true },
-        indent = { enable = true },
-      })
-    end
-  } 
+return {
+  "nvim-treesitter/nvim-treesitter",
+  build = ":TSUpdate",
+  config = function()
+    local config = require("nvim-treesitter.configs")
+    config.setup({
+      auto_install = true,
+      ensure_installed = { "lua", "javascript", "typescript", "tsx", "styled", "bash" },
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = {"typescript", "tsx"},
+      },
+      indent = { enable = true },
+    })
+
+    -- Set up .env file detection
+    vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+      pattern = {".env", ".env.*"},
+      callback = function()
+        vim.bo.filetype = "sh"
+      end
+    })
+
+    -- Extend bash parser to be used for .env files
+    local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+    parser_config.bash.used_by = { "sh", "bash", "zsh", "env" }
+  end
+}
