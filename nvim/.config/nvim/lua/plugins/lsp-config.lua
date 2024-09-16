@@ -14,7 +14,7 @@ return {
           "clangd",
           "tailwindcss",
           "graphql",
-          "tsserver", -- or eslint
+          "ts_ls", -- or eslint
           "pyright",
           "rust_analyzer",
         }
@@ -29,7 +29,7 @@ return {
       lspconfig.clangd.setup({})
       lspconfig.tailwindcss.setup({})
       lspconfig.graphql.setup({})
-      lspconfig.tsserver.setup({})
+      lspconfig.ts_ls.setup({})
       lspconfig.pyright.setup({})
       lspconfig.rust_analyzer.setup({})
 

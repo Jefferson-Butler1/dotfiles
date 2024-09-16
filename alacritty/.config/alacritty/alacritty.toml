@@ -23,3 +23,10 @@ style = "Italic"
 [font.normal]
 family = "MesloLGS Nerd Font Mono"
 style = "Regular"
+
+[keyboard]
+bindings = [
+{ key = "S", mods = "Command", action = "None" },
+]
+
+
