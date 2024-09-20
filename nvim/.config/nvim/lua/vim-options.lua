@@ -7,6 +7,28 @@ vim.g.mapleader = " "
 vim.wo.number = true
 vim.wo.relativenumber = true
 
+-- Optional: Add a command to toggle resize mode
+vim.api.nvim_create_user_command('ToggleResizeMode', function()
+  local resize_mode = vim.b.resize_mode or false
+  vim.b.resize_mode = not resize_mode
+  if vim.b.resize_mode then
+    vim.keymap.set('n', 'h', ':vertical resize -2<CR>', {buffer = true, silent = true})
+    vim.keymap.set('n', 'l', ':vertical resize +2<CR>', {buffer = true, silent = true})
+    vim.keymap.set('n', 'j', ':resize -2<CR>', {buffer = true, silent = true})
+    vim.keymap.set('n', 'k', ':resize +2<CR>', {buffer = true, silent = true})
+    print("Resize mode enabled")
+  else
+    vim.keymap.del('n', 'h', {buffer = true})
+    vim.keymap.del('n', 'l', {buffer = true})
+    vim.keymap.del('n', 'j', {buffer = true})
+    vim.keymap.del('n', 'k', {buffer = true})
+    print("Resize mode disabled")
+  end
+end, {})
+
+-- Optional: Map a key to toggle resize mode
+vim.keymap.set('n', '<M-r>', ':ToggleResizeMode<CR>', {silent = true})
+
 vim.schedule(function()
   vim.opt.clipboard = "unnamed,unnamedplus"
 end)
