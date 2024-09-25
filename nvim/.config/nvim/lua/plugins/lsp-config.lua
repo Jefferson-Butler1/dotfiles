@@ -7,36 +7,77 @@ return {
   },
   {
     "williamboman/mason-lspconfig.nvim",
-    config = function()
-      require("mason-lspconfig").setup({
-        ensure_installed = {
-          "lua_ls",
-          "clangd",
-          "tailwindcss",
-          "graphql",
-          "ts_ls",  -- maybe use eslint_d?
-          "pyright",
-          "rust_analyzer",
-        }
-      })
-    end
-  },
-  {
-    "neovim/nvim-lspconfig",
     dependencies = {
+      "neovim/nvim-lspconfig",
       "hrsh7th/cmp-nvim-lsp",
+      "nvimtools/none-ls.nvim",
+      "nvimtools/none-ls-extras.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
     config = function()
+      local mason_lspconfig = require("mason-lspconfig")
       local lspconfig = require("lspconfig")
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+      local mason_tool_installer = require("mason-tool-installer")
+      local null_ls = require("null-ls")
+      local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-      -- Setup for each LSP
-      local servers = { "lua_ls", "clangd", "tailwindcss", "graphql", "ts_ls", "pyright", "rust_analyzer" }
-      for _, lsp in ipairs(servers) do
-        lspconfig[lsp].setup({
-          capabilities = capabilities,
-        })
-      end
+      -- List of LSP servers, formatters, and linters to install and configure
+      local servers = {
+        "lua_ls",
+        "clangd",
+        "tailwindcss",
+        "graphql",
+        "ts_ls",
+        "pyright",
+        "rust_analyzer",
+      }
+
+      local tools = {
+        "stylua",
+        "prettierd",
+        "eslint_d",
+        "shellharden",
+        "isort",
+        "black",
+        "flake8",
+      }
+
+      -- Ensure all specified tools are installed
+      mason_tool_installer.setup({
+        ensure_installed = vim.list_extend(servers, tools)
+      })
+
+      -- Setup Mason-lspconfig
+      mason_lspconfig.setup({
+        ensure_installed = servers,
+        automatic_installation = true,
+      })
+
+      -- Shared capabilities for all LSP servers
+      local capabilities = cmp_nvim_lsp.default_capabilities()
+
+      -- Setup each LSP server
+      mason_lspconfig.setup_handlers({
+        function(server_name)
+          lspconfig[server_name].setup({
+            capabilities = capabilities,
+          })
+        end,
+        -- Add any server-specific configurations here
+      })
+
+      -- Setup null-ls for formatting and diagnostics
+      null_ls.setup({
+        sources = {
+          null_ls.builtins.formatting.stylua,
+          null_ls.builtins.formatting.prettierd,
+          require("none-ls.diagnostics.eslint_d"),
+          null_ls.builtins.formatting.shellharden,
+          null_ls.builtins.formatting.isort,
+          null_ls.builtins.formatting.black,
+          null_ls.builtins.diagnostics.flake8,
+        },
+      })
 
       -- Keymaps
       local opts = { noremap = true, silent = true }
@@ -52,8 +93,6 @@ return {
       vim.keymap.set('n', ']d', vim.diagnostic.goto_prev, opts)
       vim.keymap.set('n', '<leader>vrr', vim.lsp.buf.references, opts)
       vim.keymap.set('n', '<leader>vrn', vim.lsp.buf.rename, opts)
-      
-      -- Formatting keymap
       vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, opts)
     end
   },
