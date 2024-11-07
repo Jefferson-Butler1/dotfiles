@@ -1,13 +1,47 @@
-[credential "https://github.com"]
-	helper = 
-	helper = !/usr/bin/gh auth git-credential
-[credential "https://gist.github.com"]
-	helper = 
-	helper = !/usr/bin/gh auth git-credential
-[user]
-	email = jefferson.butler@icloud.com
-	name = Jefferson-Butler1
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+
+[include]
+    path = ~/.gitconfig.local
+
 [push]
-	autoSetupRemote = true
-[core] 
-	editor = vim
+    autoSetupRemote = true
+    useForceIfIncludes = true
+    default = current
+
+[core]
+    editor = nvim
+    autocrlf = input
+    fileMode = false
+
+[pull]
+    rebase = true
+
+[rebase]
+    autoStash = true
+    updateRefs = true
+
+[branch]
+    sort = -committerdate
+
+[rerere]
+    enabled = true
+
+[merge]
+    conflictStyle = zdiff3
+
+[fetch]
+    prune = true
+
+[help]
+    # Wait 2 seconds (20 deciseconds) before executing a corrected command
+    # Example: if you type 'git statsu', it will wait 2 seconds then run 'git status'
+    autocorrect = 20
+
+[alias]
+    # Check if branch needs rebase
+    behind = "!git rev-list --left-right --count HEAD...@{u} | cut -f2"
+
