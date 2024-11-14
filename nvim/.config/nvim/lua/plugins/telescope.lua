@@ -1,51 +1,48 @@
 return {
-	{
-		"nvim-telescope/telescope.nvim",
-		tag = "0.1.8",
-		dependencies = { "nvim-lua/plenary.nvim", "BurntSushi/ripgrep" },
-		config = function()
-			local builtin = require("telescope.builtin")
+  "nvim-telescope/telescope.nvim",
+  tag = "0.1.8",
+  dependencies = { "nvim-lua/plenary.nvim", "BurntSushi/ripgrep" },
+  config = function()
+    local builtin = require("telescope.builtin")
+    local telescope = require("telescope")
 
-			-- Regular file finding (non-hidden files)
-			vim.keymap.set("n", "<leader>ff", function()
-				builtin.find_files()
-			end, {})
+    -- Configure telescope
+    telescope.setup({
+      defaults = {
+        path_display = { "truncate" },
+        file_ignore_patterns = { "node_modules", ".git" },
+        mappings = {
+          i = {
+            ["<C-j>"] = "move_selection_next",
+            ["<C-k>"] = "move_selection_previous",
+          },
+        },
+        vimgrep_arguments = {
+          "rg",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+          "--hidden"
+        },
+        find_command = {
+          "rg",
+          "--files",
+          "--hidden",
+          "--smart-case"
+        },
+      },
+    })
 
-			-- Hidden file finding
-			vim.keymap.set("n", "<leader>fh", function()
-				require("telescope.builtin").find_files({
-					find_command = {
-						"rg",
-						"--files",
-						"--hidden",
-						"--glob",
-						"!.git",
-						"--glob",
-						"!node_modules",
-						"--no-ignore",
-					},
-				})
-			end, {})
 
-			vim.keymap.set("n", "<leader>fb", function()
-				require("telescope.builtin").buffers({ sort_lastused = true, ignore_current_buffer = false})
-			end, {})
-
-			-- Live grep (searching file contents)
-			vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-		end,
-	},
-	{
-		"nvim-telescope/telescope-ui-select.nvim",
-		config = function()
-			require("telescope").setup({
-				extensions = {
-					["ui-select"] = {
-						require("telescope.themes").get_dropdown({}),
-					},
-				},
-			})
-			require("telescope").load_extension("ui-select")
-		end,
-	},
+    vim.keymap.set("n", "<leader>ff", builtin.find_files, {})                -- Uses rg by default
+    vim.keymap.set("n", "<leader>fb", function() builtin.buffers({ sort_lastused = true }) end, {})
+    vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})                 -- Uses rg by default
+    vim.keymap.set("n", "<leader>fr", builtin.oldfiles, {})                  -- Recent files
+    vim.keymap.set("n", "<leader>fw", builtin.grep_string, {})               -- Search word under cursor
+    vim.keymap.set("n", "<leader>fc", builtin.current_buffer_fuzzy_find, {}) -- Search in current buffer
+    vim.keymap.set("n", "<leader>ft", builtin.treesitter, {})                -- Browse treesitter symbols
+  end,
 }

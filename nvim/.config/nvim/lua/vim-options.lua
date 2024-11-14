@@ -1,7 +1,10 @@
-vim.cmd("set expandtab")
-vim.cmd("set tabstop=2")
-vim.cmd("set softtabstop=2")
-vim.cmd("set shiftwidth=2")
+vim.opt.expandtab = true
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+vim.opt.breakindent = true
 vim.g.mapleader=" "
 
 vim.wo.number = true
@@ -11,8 +14,6 @@ vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
 
--- Enable break indent
--- vim.opt.breakindent = true
 
 -- Save undo history
 vim.opt.undofile = true

@@ -5,12 +5,13 @@ return {
     local config = require("nvim-treesitter.configs")
     config.setup({
       auto_install = true,
+
       ensure_installed = { "lua", "javascript", "typescript", "tsx", "styled", "bash" },
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = {"typescript", "tsx"},
       },
-      indent = { enable = true },
+--      indent = { enable = true }, -- breaks indents, no clue why. replaced with logic in vim-opts
     })
 
     -- Set up .env file detection
