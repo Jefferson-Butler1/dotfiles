@@ -6,17 +6,17 @@ return {
     config.setup({
       auto_install = true,
 
-      ensure_installed = { "lua", "javascript", "typescript", "tsx", "styled", "bash" },
+      ensure_installed = { "lua", "c", "javascript", "typescript", "tsx", "styled", "bash" },
       highlight = {
         enable = true,
-        additional_vim_regex_highlighting = {"typescript", "tsx"},
+        additional_vim_regex_highlighting = { "typescript", "tsx" },
       },
---      indent = { enable = true }, -- breaks indents, no clue why. replaced with logic in vim-opts
+      --      indent = { enable = true }, -- breaks indents, no clue why. replaced with logic in vim-opts
     })
 
     -- Set up .env file detection
-    vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
-      pattern = {".env", ".env.*"},
+    vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+      pattern = { ".env", ".env.*" },
       callback = function()
         vim.bo.filetype = "sh"
       end
