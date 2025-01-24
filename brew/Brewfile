@@ -1,0 +1,36 @@
+# Brewfile
+# Core taps
+tap "homebrew/bundle"
+tap "homebrew/services"
+
+# Essential development tools
+brew "git"
+brew "gh"          # GitHub CLI
+brew "make"
+brew "neovim"
+brew "lazygit"
+brew "stow"
+brew "fzf"
+brew "ripgrep"
+brew "bat"         # Better cat
+brew "eza"         # Modern ls replacement with tree view
+
+# Package manager (will install Node.js as dependency)
+brew "yarn"
+
+# Python (if you need it for any backend services)
+brew "python@3.12"
+
+# Databases
+brew "postgresql@14"
+brew "mysql"
+
+# System monitoring and development
+brew "btop"        # System/Process monitor
+brew "tmux"        # Terminal multiplexer
+brew "docker"
+
+# UI Dependencies and Applications
+cask "font-meslo-lg-nerd-font"
+cask "raycast"     # Spotlight replacement
+cask "xquartz"     # X11 server
