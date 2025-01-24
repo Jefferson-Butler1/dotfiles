@@ -87,6 +87,7 @@ return {
         { name = "luasnip" },
         { name = "buffer" },
         { name = "path" },
+        { name = 'nvim_lsp_signature_help' },
       }),
     })
     -- Set up auto-pairs
