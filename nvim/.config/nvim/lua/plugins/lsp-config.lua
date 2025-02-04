@@ -12,11 +12,8 @@ return {
         ensure_installed = {
           "lua_ls",
           "clangd",
-          "tailwindcss",
-          "graphql",
           "ts_ls",
-          "pyright",
-          "rust_analyzer",
+          "prettierd"
         }
       })
     end
@@ -31,7 +28,12 @@ return {
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
       -- Setup for each LSP
-      local servers = { "lua_ls", "clangd", "tailwindcss", "graphql", "ts_ls", "pyright", "rust_analyzer" }
+      local servers = { 
+        "prettierd", 
+        "lua_ls", 
+        "clangd", 
+        "ts_ls",
+      }
       for _, lsp in ipairs(servers) do
         lspconfig[lsp].setup({
           capabilities = capabilities,
@@ -40,7 +42,7 @@ return {
 
       -- Keymaps
       local opts = { noremap = true, silent = true }
-      vim.keymap.set('n', 'gd',  vim.lsp.buf.definition, opts)
+      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
       vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
       vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
       vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)

@@ -59,6 +59,27 @@ plugins=(
 ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
 
+# Function to set terminal title
+function set_title() {
+    # Set the tab title to the provided string
+    echo -ne "\e]1;$@\a"
+}
+
+# This runs before each prompt
+function precmd() {
+    # When no program is running, just show the directory name
+    set_title "~${PWD##*/}"
+}
+
+# This runs before executing a command
+function preexec() {
+    # Get the first word of the command (the program name)
+    local program=$(echo "$1" | cut -d' ' -f1)
+    # Show program and directory
+    set_title "$program~${PWD##*/}"
+}
+DISABLE_AUTO_TITLE="true"
+
 # Basic aliases
 alias vim="nvim"
 export NVIMCONF="$HOME/dotfiles/nvim/.config/nvim"

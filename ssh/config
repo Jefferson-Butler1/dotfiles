@@ -1,0 +1,13 @@
+
+Host ArchAngel
+    HostName 192.168.0.192
+    User jeff
+    ForwardX11Trusted yes
+    LocalForward 9191 9191
+    LocalForward 9090 9090
+    LocalForward 8080 8080
+    LocalForward 51413 51413  # Transmission VPN
+    LocalForward 32400 32400  # Plex
+    LocalForward 8989 8989    # Sonarr
+    LocalForward 7878 7878    # Radarr
+    LocalForward 8686 8686    # Lidarr

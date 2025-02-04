@@ -1,0 +1,53 @@
+# theme = light:rose-pine-dawn,dark:rose-pine
+# theme = catppuccin-frappe
+macos-titlebar-style = tabs
+title = ""
+
+# -= Keybinds =-
+# I want to have a leader based control
+# system for ghostty (to avoid key collissions
+# with other applications), where <C-s>
+# is used as my leader key for operations
+# while the meta/alt key is used for
+# movement within the multiplexed terminals
+
+# -= Commands =-
+
+# General
+keybind = ctrl+s>r=reload_config
+keybind = ctrl+s>a=select_all
+keybind = ctrl+s>c=copy_to_clipboard
+keybind = ctrl+s>v=paste_from_clipboard
+keybind = ctrl+s>k>i>l>l=close_surface
+# Currently not working
+keybind = ctrl+s>t>i=inspector:toggle
+
+# Window, Tab and Splits (panes)
+keybind = ctrl+s>q=toggle_quick_terminal
+keybind = ctrl+s>w>n=new_window
+
+keybind = ctrl+s>t>n=new_tab
+keybind = ctrl+s>p>n=new_split:auto
+keybind = ctrl+s>p>r=new_split:right
+keybind = ctrl+s>p>l=new_split:left
+keybind = ctrl+s>p>u=new_split:up
+keybind = ctrl+s>p>d=new_split:down
+keybind = ctrl+s>p>f=toggle_split_zoom
+
+keybind = alt>equal=equalize_splits
+keybind = alt>,=resize_split:left,10
+keybind = alt>.=resize_split:right,10
+keybind = alt>6=resize_split:up,10
+keybind = alt>7=resize_split:down,10
+
+# -= Navigation =-
+
+# Split navigation
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+j=goto_split:bottom
+keybind = ctrl+k=goto_split:top
+keybind = ctrl+l=goto_split:right
+
+# Prompt navigation
+keybind = alt+k=jump_to_prompt:-1
+keybind = alt+j=jump_to_prompt:1
