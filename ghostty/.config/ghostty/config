@@ -43,10 +43,10 @@ keybind = alt>7=resize_split:down,10
 # -= Navigation =-
 
 # Split navigation
-keybind = ctrl+h=goto_split:left
-keybind = ctrl+j=goto_split:bottom
-keybind = ctrl+k=goto_split:top
-keybind = ctrl+l=goto_split:right
+keybind = cmd+h=goto_split:left
+keybind = cmd+j=goto_split:bottom
+keybind = cmd+k=goto_split:top
+keybind = cmd+l=goto_split:right
 
 # Prompt navigation
 keybind = alt+k=jump_to_prompt:-1

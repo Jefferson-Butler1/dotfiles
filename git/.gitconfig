@@ -45,3 +45,8 @@
     # Check if branch needs rebase
     behind = "!git rev-list --left-right --count HEAD...@{u} | cut -f2"
 
+[user]
+	name = Jefferson-Butler1
+  email = jefferson.butler@icloud.com
+[url "git@github.com:"]
+	insteadOf = https://github.com/

@@ -37,12 +37,12 @@ return {
     })
 
 
-    vim.keymap.set("n", "<leader>ff", builtin.find_files, {})                -- Uses rg by default
-    vim.keymap.set("n", "<leader>fb", function() builtin.buffers({ sort_lastused = true }) end, {})
-    vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})                 -- Uses rg by default
-    vim.keymap.set("n", "<leader>fr", builtin.oldfiles, {})                  -- Recent files
-    vim.keymap.set("n", "<leader>fw", builtin.grep_string, {})               -- Search word under cursor
-    vim.keymap.set("n", "<leader>fc", builtin.current_buffer_fuzzy_find, {}) -- Search in current buffer
-    vim.keymap.set("n", "<leader>ft", builtin.treesitter, {})                -- Browse treesitter symbols
+    -- vim.keymap.set("n", "<leader>ff", builtin.find_files, {})                -- Uses rg by default
+    -- vim.keymap.set("n", "<leader>fb", function() builtin.buffers({ sort_lastused = true }) end, {})
+    -- vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})                 -- Uses rg by default
+    -- vim.keymap.set("n", "<leader>fr", builtin.oldfiles, {})                  -- Recent files
+    -- vim.keymap.set("n", "<leader>fw", builtin.grep_string, {})               -- Search word under cursor
+    -- vim.keymap.set("n", "<leader>fc", builtin.current_buffer_fuzzy_find, {}) -- Search in current buffer
+    -- vim.keymap.set("n", "<leader>ft", builtin.treesitter, {})                -- Browse treesitter symbols
   end,
 }

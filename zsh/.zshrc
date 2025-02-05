@@ -82,10 +82,12 @@ DISABLE_AUTO_TITLE="true"
 
 # Basic aliases
 alias vim="nvim"
-export NVIMCONF="$HOME/dotfiles/nvim/.config/nvim"
 
 # make sure all my scripts are available
 export SCRIPTS="$HOME/scripts"
+export DOTFILES="$HOME/dotfiles"
+export OE="$HOME/OE"
+export NVIMCONF="$HOME/dotfiles/nvim/.config/nvim"
 $SCRIPTS/create_symlinks.sh
 
 export PATH=$HOME/.local/bin:$PATH
