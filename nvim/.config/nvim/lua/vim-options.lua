@@ -51,3 +51,17 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.api.nvim_set_keymap("n", "zz", ":w | :bp | bd #<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-n>", ":bnext<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-p>", ":bprevious<CR>", { noremap = true, silent = true })
+
+vim.api.nvim_create_user_command("WQ", function()
+	vim.cmd("write")
+	vim.cmd("bdel")
+end, {})
+vim.cmd("cabbrev wq WQ")
+
+vim.api.nvim_create_user_command("WriteNoHooks", function()
+	vim.cmd("set eventignore=BufWritePre")
+	vim.cmd("write")
+	vim.cmd("set eventignore=")
+end, {})
+vim.cmd([[cnoreabbrev wn w<bar>n]])
+vim.cmd("cabbrev wn WriteNoHooks")

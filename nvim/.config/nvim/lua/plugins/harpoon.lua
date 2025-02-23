@@ -15,18 +15,22 @@ return {
     vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
 
     -- Navigate to specific files
-    vim.keymap.set("n", "<leader>h1", function() ui.nav_file(1) end)
-    vim.keymap.set("n", "<leader>h2", function() ui.nav_file(2) end)
-    vim.keymap.set("n", "<leader>h3", function() ui.nav_file(3) end)
-    vim.keymap.set("n", "<leader>h4", function() ui.nav_file(4) end)
+    vim.keymap.set("n", "<leader>h1", function()
+      ui.nav_file(1)
+    end)
+    vim.keymap.set("n", "<leader>h2", function()
+      ui.nav_file(2)
+    end)
+    vim.keymap.set("n", "<leader>h3", function()
+      ui.nav_file(3)
+    end)
+    vim.keymap.set("n", "<leader>h4", function()
+      ui.nav_file(4)
+    end)
 
     -- Sequential navigation
     vim.keymap.set("n", "<leader>hn", ui.nav_next)
     vim.keymap.set("n", "<leader>hp", ui.nav_prev)
-
-    -- Send file to specific position
-    vim.keymap.set("n", "<leader>h1", function() mark.set_current_at(1) end)
-    vim.keymap.set("n", "<leader>h2", function() mark.set_current_at(2) end)
 
     -- File management
     vim.keymap.set("n", "<leader>hd", mark.rm_file)
@@ -36,4 +40,3 @@ return {
     vim.keymap.set("n", "<leader>hm", ":Telescope harpoon marks<CR>")
   end,
 }
-

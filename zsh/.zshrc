@@ -82,6 +82,7 @@ DISABLE_AUTO_TITLE="true"
 
 # Basic aliases
 alias vim="nvim"
+alias ls="eza"
 
 # make sure all my scripts are available
 export SCRIPTS="$HOME/scripts"
