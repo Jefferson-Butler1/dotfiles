@@ -1,10 +1,14 @@
 # Path to your Oh My Zsh installation
-export ZSH="$HOME/.oh-my-zsh"
+# export ZSH="$HOME/.oh-my-zsh"
+export ZSH="/usr/share/oh-my-zsh"
+export ZSH_CUSTOM=~/.oh-my-zsh/custom
 
 # Function to auto-install missing plugins
 function ensure_plugin() {
    local plugin_name=$1
-   local plugin_path=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/$plugin_name
+   local plugin_path=$ZSH_CUSTOM/plugins/$plugin_name
+   # local plugin_path=${ZSH_CUSTOM:-$ZSH/custom}/plugins/$plugin_name
+   # local plugin_path="${HOME}/.oh-my-zsh/custom/plugins/${plugin_name}"
    
    if [[ ! -d $plugin_path ]]; then
        echo "Installing $plugin_name..."
@@ -81,8 +85,14 @@ function preexec() {
 DISABLE_AUTO_TITLE="true"
 
 # Basic aliases
+export VISUAL=nvim 
+export EDITOR=nvim 
 alias vim="nvim"
 alias ls="eza"
+alias la="eza -la"
+alias ollama="docker exec -it ollama"
+
+export NVIMCONF="$HOME/dotfiles/nvim/.config/nvim"
 
 # make sure all my scripts are available
 export SCRIPTS="$HOME/scripts"
@@ -103,3 +113,4 @@ eval "$(starship init zsh)"
 
 # Enable completion system
 autoload -Uz compinit && compinit
+alias dc="docker ps --format 'table {{.ID}}\t{{.CreatedAt}}\t{{.Status}}\t{{.Names}}'"

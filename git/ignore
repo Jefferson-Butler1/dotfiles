@@ -1,0 +1,10 @@
+# Secrets
+.env
+.env.*
+
+# Dependencies
+node_modules
+*.swp
+.DS_Store
+*.log*
+
