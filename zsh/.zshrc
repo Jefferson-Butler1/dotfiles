@@ -88,8 +88,9 @@ DISABLE_AUTO_TITLE="true"
 export VISUAL=nvim 
 export EDITOR=nvim 
 alias vim="nvim"
-alias ls="eza"
-alias la="eza -la"
+alias ls="eza -lh"
+alias la="eza -lha"
+alias tree="eza -lh --tree"
 alias ollama="docker exec -it ollama"
 
 export NVIMCONF="$HOME/dotfiles/nvim/.config/nvim"
