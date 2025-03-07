@@ -14,7 +14,7 @@ vim.wo.relativenumber = true
 
 -- Use system clipboard
 vim.schedule(function()
-	vim.opt.clipboard = "unnamedplus"
+  vim.opt.clipboard = "unnamedplus"
 end)
 
 -- Save undo history between sessions
@@ -41,11 +41,11 @@ vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower win
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight when yanking (copying) text",
-	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-	callback = function()
-		vim.highlight.on_yank()
-	end,
+  desc = "Highlight when yanking (copying) text",
+  group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
 })
 
 vim.api.nvim_set_keymap("n", "zz", ":w | :bp | bd #<CR>", { noremap = true, silent = true })
@@ -53,15 +53,15 @@ vim.api.nvim_set_keymap("n", "<C-n>", ":bnext<CR>", { noremap = true, silent = t
 vim.api.nvim_set_keymap("n", "<C-p>", ":bprevious<CR>", { noremap = true, silent = true })
 
 vim.api.nvim_create_user_command("WQ", function()
-	vim.cmd("write")
-	vim.cmd("bdel")
+  vim.cmd("write")
+  vim.cmd("bdel")
 end, {})
 vim.cmd("cabbrev wq WQ")
 
 vim.api.nvim_create_user_command("WriteNoHooks", function()
-	vim.cmd("set eventignore=BufWritePre")
-	vim.cmd("write")
-	vim.cmd("set eventignore=")
+  vim.cmd("set eventignore=BufWritePre")
+  vim.cmd("write")
+  vim.cmd("set eventignore=")
 end, {})
 vim.cmd([[cnoreabbrev wn w<bar>n]])
 vim.cmd("cabbrev wn WriteNoHooks")

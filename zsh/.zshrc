@@ -1,6 +1,6 @@
 # Path to your Oh My Zsh installation
-# export ZSH="$HOME/.oh-my-zsh"
-export ZSH="/usr/share/oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"       # REQUIRED FOR MACOS
+# export ZSH="/usr/share/oh-my-zsh" # REQUIRED FOR LINUX
 export ZSH_CUSTOM=~/.oh-my-zsh/custom
 
 # Function to auto-install missing plugins
@@ -91,7 +91,6 @@ alias vim="nvim"
 alias ls="eza -lh"
 alias la="eza -lha"
 alias tree="eza -lh --tree"
-alias ollama="docker exec -it ollama"
 
 export NVIMCONF="$HOME/dotfiles/nvim/.config/nvim"
 
@@ -115,3 +114,7 @@ eval "$(starship init zsh)"
 # Enable completion system
 autoload -Uz compinit && compinit
 alias dc="docker ps --format 'table {{.ID}}\t{{.CreatedAt}}\t{{.Status}}\t{{.Names}}'"
+
+alias fp="ps au | fzf"
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+export PATH="/usr/local/opt/postgresql@16/bin:$PATH"
