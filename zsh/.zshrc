@@ -2,6 +2,7 @@
 export ZSH="$HOME/.oh-my-zsh"       # REQUIRED FOR MACOS
 # export ZSH="/usr/share/oh-my-zsh" # REQUIRED FOR LINUX
 export ZSH_CUSTOM=~/.oh-my-zsh/custom
+export MANPAGER='nvim +Man!'
 
 # Function to auto-install missing plugins
 function ensure_plugin() {
@@ -118,3 +119,4 @@ alias dc="docker ps --format 'table {{.ID}}\t{{.CreatedAt}}\t{{.Status}}\t{{.Nam
 alias fp="ps au | fzf"
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 export PATH="/usr/local/opt/postgresql@16/bin:$PATH"
+alias st=speedtest

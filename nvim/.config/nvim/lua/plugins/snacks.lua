@@ -49,7 +49,7 @@ return {
     { "<leader>ss",       function() Snacks.scratch.select() end,                                   desc = "Select Scratch Buffer" },
     { "<leader>gl",       function() Snacks.lazygit.log_file() end,                                 desc = "Lazygit Log (cwd)" },
     { "<leader>gb",       function() Snacks.git.blame_line() end,                                   desc = "Git Blame" },
-    { "<leader>l",        function() Snacks.lazygit() end,                                          desc = "Lazygit" },
+    { "<C-g>",            function() Snacks.lazygit() end,                                          desc = "Lazygit" },
     { "<leader><leader>", function() Snacks.picker.smart() end,                                     desc = "Smart Files" },
     { "<leader>ff",       function() Snacks.picker.pick("files") end,                               desc = "Find Files" },
     { "<leader>fh",       function() Snacks.picker.help() end,                                      desc = "Help Pages" },

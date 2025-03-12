@@ -1,7 +1,6 @@
 {
   "Comment.nvim": { "branch": "master", "commit": "e30b7f2008e52442154b66f7c519bfd2f1e32acb" },
   "LuaSnip": { "branch": "master", "commit": "c9b9a22904c97d0eb69ccb9bab76037838326817" },
-  "augment.vim": { "branch": "main", "commit": "a50e362f6c16a0c43da20f613e337a6dfd3fb94a" },
   "catppuccin": { "branch": "main", "commit": "5b5e3aef9ad7af84f463d17b5479f06b87d5c429" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "99290b3ec1322070bcfb9e846450a46f6efa50f0" },
@@ -24,6 +23,7 @@
   "nvim-web-devicons": { "branch": "master", "commit": "1020869742ecb191f260818234517f4a1515cfe8" },
   "oil.nvim": { "branch": "master", "commit": "975a77cce3c8cb742bc1b3629f4328f5ca977dad" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
+  "rainbow_csv.nvim": { "branch": "main", "commit": "7f3fddfe813641035fac2cdf94c2ff69bb0bf0b9" },
   "refactoring.nvim": { "branch": "master", "commit": "eaa096df3f3a8ce879f841faea750c7c3fb2bf1c" },
   "ripgrep": { "branch": "master", "commit": "de4baa10024f2cb62d438596274b9b710e01c59b" },
   "snacks.nvim": { "branch": "main", "commit": "07f4b9adff7af45a7e0eb22d85a422e32ed4b1ca" },

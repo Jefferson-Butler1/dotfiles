@@ -1,3 +1,11 @@
+Host *
+    # Store keys in the client when first using them.
+    AddKeysToAgent yes
+
+    # Make all sessions to the same host share a single connection.
+    ControlMaster auto
+    ControlPersist 120
+    ControlPath ~/.ssh/sockets/socket-%r@%h:%p
 
 Host ArchAngel
     HostName 192.168.0.192
