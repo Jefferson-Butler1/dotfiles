@@ -1,46 +1,48 @@
-# Brewfile
-# Core taps
 tap "homebrew/bundle"
 tap "homebrew/services"
-
-# Essential development tools
-brew "git"
-brew "gh"          # GitHub CLI
-brew "make"
-brew "neovim"
-brew "node"
-brew "lazygit"
-brew "stow"
+tap "teamookla/speedtest"
+brew "python@3.13"
+brew "asitop"
+brew "bat"
+brew "btop"
+brew "dotenv-linter"
+brew "eza"
+brew "fd"
 brew "fzf"
-brew "ripgrep"
-brew "bat"         # Better cat
-brew "eza"         # Modern ls replacement with tree view
-
-# Package manager (will install Node.js as dependency)
-brew "yarn"
-
-# Python (if you need it for any backend services)
-brew "python@3.12"
-
-# Databases
-brew "postgresql@14"
+brew "gh"
+brew "git"
+brew "git-delta"
+brew "go"
+brew "heroku"
+brew "lazygit"
+brew "make"
+brew "multitail"
 brew "mysql"
-
-# Custom Service stuff
+brew "neofetch"
+brew "neovim"
 brew "ollama"
-
-# System monitoring and development
-brew "btop"        # System/Process monitor
-brew "tmux"        # Terminal multiplexer
-brew "docker"
-
-# UI Dependencies and Applications
+brew "platformio"
+brew "postgresql@16"
+brew "python@3.12"
+brew "ripgrep"
+brew "stow"
+brew "tmux"
+brew "tpm"
+brew "yarn"
+brew "teamookla/speedtest/speedtest"
+cask "discord"
+cask "docker"
+cask "figma"
 cask "font-meslo-lg-nerd-font"
-cask "raycast"     # Spotlight replacement
-cask "xquartz"     # X11 server
-cask "slack"
 cask "ghostty"
-cask "zen-browser"
+cask "google-chrome"
 cask "obsidian"
+cask "postico"
+cask "postman"
+cask "raycast"
+cask "slack"
 cask "spotify"
-
+cask "steam"
+cask "vivaldi"
+cask "xquartz"
+cask "zen-browser"
