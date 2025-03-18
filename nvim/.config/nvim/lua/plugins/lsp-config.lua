@@ -64,13 +64,42 @@ return {
 					client.server_capabilities.documentFormattingProvider = false
 				end,
 			})
-			require("lspconfig").lua_ls.setup({ capabilities = capabilities })
-			require("lspconfig").bashls.setup({ capabilities = capabilities })
-			require("lspconfig").yamlls.setup({ capabilities = capabilities })
+
+			require("lspconfig").gopls.setup({
+				capabilities = capabilities,
+				settings = {
+					gopls = {
+						analyses = {
+							unusedparams = true,
+							shadow = true,
+						},
+						staticcheck = true,
+						gofumpt = true, -- Stricter formatting
+						usePlaceholders = true,
+						completeUnimported = true,
+						matcher = "fuzzy",
+						symbolMatcher = "fuzzy",
+						buildFlags = { "-tags=test,e2e" },
+						directoryFilters = {
+							"-node_modules",
+							"-vendor",
+							"-internal",
+						},
+					},
+				},
+			})
+
 			require("lspconfig").golangci_lint_ls.setup({
 				capabilities = capabilities,
 				filetypes = { "go", "gomod" },
+				init_options = {
+					command = { "golangci-lint", "run", "--out-format", "json" },
+				},
 			})
+
+			require("lspconfig").lua_ls.setup({ capabilities = capabilities })
+			require("lspconfig").bashls.setup({ capabilities = capabilities })
+			require("lspconfig").yamlls.setup({ capabilities = capabilities })
 			-- Null-ls setup with explicit source ordering
 			local null_ls = require("null-ls")
 			null_ls.setup({

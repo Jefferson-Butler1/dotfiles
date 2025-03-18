@@ -3,6 +3,7 @@ export ZSH="$HOME/.oh-my-zsh"       # REQUIRED FOR MACOS
 # export ZSH="/usr/share/oh-my-zsh" # REQUIRED FOR LINUX
 export ZSH_CUSTOM=~/.oh-my-zsh/custom
 export MANPAGER='nvim +Man!'
+export XDG_CONFIG_HOME="$HOME/.config"
 
 # Function to auto-install missing plugins
 function ensure_plugin() {
