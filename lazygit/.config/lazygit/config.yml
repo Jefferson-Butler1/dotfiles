@@ -127,7 +127,7 @@ git:
     showGraph: always
 
     # displays the whole git graph by default in the commits view (equivalent to passing the `--all` argument to `git log`)
-    showWholeGraph: true
+    showWholeGraph: false 
 
   # When copying commit hashes to the clipboard, truncate them to this
   # length. Set to 40 to disable truncation.
