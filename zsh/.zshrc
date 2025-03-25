@@ -121,3 +121,4 @@ alias fp="ps au | fzf"
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 export PATH="/usr/local/opt/postgresql@16/bin:$PATH"
 alias st=speedtest
+. "$HOME/.cargo/env"
