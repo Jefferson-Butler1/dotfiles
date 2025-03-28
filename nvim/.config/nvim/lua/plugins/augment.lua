@@ -6,5 +6,5 @@ vim.keymap.set("n", "<leader>act", "<cmd>Augment chat-toggle<CR>", { desc = "Tog
 vim.keymap.set("n", "<leader>acn", "<cmd>Augment chat-new<CR>", { desc = "New Augment Chat" })
 vim.keymap.set("n", "<leader>acc", "<cmd>Augment chat<CR>", { desc = "Augment Chat" })
 return {
-	-- "augmentcode/augment.vim",
+  "augmentcode/augment.vim",
 }

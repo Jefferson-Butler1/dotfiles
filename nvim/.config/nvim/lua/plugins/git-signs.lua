@@ -72,15 +72,23 @@ return {
         -- Hunk actions begin with <leader>h
         map("n", "<leader>hs", gs.stage_hunk, { desc = "Git: Stage hunk" })
         map("n", "<leader>hr", gs.reset_hunk, { desc = "Git: Reset hunk" })
-        map("v", "<leader>hs", function() gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, { desc = "Git: Stage selected hunk" })
-        map("v", "<leader>hr", function() gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, { desc = "Git: Reset selected hunk" })
+        map("v", "<leader>hs", function()
+          gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+        end, { desc = "Git: Stage selected hunk" })
+        map("v", "<leader>hr", function()
+          gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+        end, { desc = "Git: Reset selected hunk" })
         map("n", "<leader>hS", gs.stage_buffer, { desc = "Git: Stage buffer" })
         map("n", "<leader>hu", gs.undo_stage_hunk, { desc = "Git: Undo stage hunk" })
         map("n", "<leader>hR", gs.reset_buffer, { desc = "Git: Reset buffer" })
         map("n", "<leader>hp", gs.preview_hunk, { desc = "Git: Preview hunk" })
-        map("n", "<leader>hb", function() gs.blame_line({ full = true }) end, { desc = "Git: Blame line (full)" })
+        map("n", "<leader>hb", function()
+          gs.blame_line({ full = true })
+        end, { desc = "Git: Blame line (full)" })
         map("n", "<leader>hd", gs.diffthis, { desc = "Git: Diff this" })
-        map("n", "<leader>hD", function() gs.diffthis("~") end, { desc = "Git: Diff this (~)" })
+        map("n", "<leader>hD", function()
+          gs.diffthis("~")
+        end, { desc = "Git: Diff this (~)" })
 
         -- Added hunk navigation commands
         map("n", "<leader>hn", gs.next_hunk, { desc = "Git: Next hunk" })
@@ -92,6 +100,17 @@ return {
         map("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "Git: Toggle line blame" })
         map("n", "<leader>tl", gs.toggle_linehl, { desc = "Git: Toggle line highlight" })
         map("n", "<leader>td", gs.toggle_deleted, { desc = "Git: Toggle deleted" })
+
+        -- merge Resolution
+        map("n", "<leader>pm", function()
+          vim.cmd("Gitsigns diffthis")
+          vim.cmd("diffget LOCAL")
+        end, { desc = "Git: Take mine (LOCAL)" })
+
+        map("n", "<leader>pt", function()
+          vim.cmd("Gitsigns diffthis")
+          vim.cmd("diffget REMOTE")
+        end, { desc = "Git: Take theirs (REMOTE)" })
       end,
     })
   end,

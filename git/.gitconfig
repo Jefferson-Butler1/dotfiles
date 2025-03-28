@@ -22,6 +22,7 @@
   algorithm = patience
   compactionHeuristic = true
   tool = nvimdiff
+	indentHeuristic = true
 
 [difftool "nvimdiff"]
   ; cmd = nvim -d \"$LOCAL\" \"$REMOTE\" -c \"$wincmd w\" -c \"$wincmd L\"
