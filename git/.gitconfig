@@ -45,11 +45,11 @@ cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c '$wincmd J'
 [branch]
     sort = -committerdate
 
-[rerere]
-    enabled = true
+; [rerere]
+;     enabled = true
 
-[merge]
-    conflictStyle = zdiff3
+; [merge]
+;     conflictStyle = zdiff3
 
 [fetch]
     prune = true

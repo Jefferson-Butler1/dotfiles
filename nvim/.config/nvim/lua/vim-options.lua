@@ -48,15 +48,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
-vim.api.nvim_set_keymap("n", "zz", ":w | :bp | bd #<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "zz", ":w | :bp | bd #<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-n>", ":bnext<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-p>", ":bprevious<CR>", { noremap = true, silent = true })
-
-vim.api.nvim_create_user_command("WQ", function()
-  vim.cmd("write")
-  vim.cmd("bdel")
-end, {})
-vim.cmd("cabbrev wq WQ")
 
 vim.api.nvim_create_user_command("WriteNoHooks", function()
   vim.cmd("set eventignore=BufWritePre")
@@ -65,3 +59,15 @@ vim.api.nvim_create_user_command("WriteNoHooks", function()
 end, {})
 vim.cmd([[cnoreabbrev wn w<bar>n]])
 vim.cmd("cabbrev wn WriteNoHooks")
+
+vim.api.nvim_create_user_command("CWD", function()
+  local path = vim.fn.expand("%:p")
+  vim.fn.setreg("+", path)
+  print(path)
+end, {})
+vim.cmd("cabbrev cwd CWD")
+
+vim.api.nvim_create_user_command("BDA", function()
+  vim.fn.expand("%bd|e#")
+end, {})
+vim.cmd("cabbrev bda BDA")

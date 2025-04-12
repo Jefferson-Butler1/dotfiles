@@ -10,6 +10,23 @@ local termconf = {
   }
 }
 
+local excludeArgs = {
+      hidden = true,    -- Include hidden files
+      ignored = true,   -- Include ignored files (based on .gitignore)
+      exclude = {
+        "node_modules",
+        "dist",
+        "build",
+        "target",       -- Rust build directory
+        "vendor",       -- Go vendor directory
+        ".git",
+        "*.min.js",
+        "*.lock",
+        "*/tmp/*"
+      }
+    }
+
+
 return {
   "folke/snacks.nvim",
   dependencies = {
@@ -55,7 +72,7 @@ return {
     { "<leader>fh",       function() Snacks.picker.help() end,                                      desc = "Help Pages" },
     { "<leader>fr",       function() Snacks.picker.recent() end,                                    desc = "Find Recent Files" },
     { "<leader>fb",       function() Snacks.picker.buffers() end,                                   desc = "Buffers" },
-    { "<leader>fg",       function() Snacks.picker.grep() end,                                      desc = "Grep Files" },
+    { "<leader>fg",       function() Snacks.picker.grep(excludeArgs) end,                           desc = "Grep Files" },
     { "<leader>fw",       function() Snacks.picker.grep_word() end,                                 mode = { "n", "x" } },
     { "<leader>ft",       function() Snacks.picker.treesitter() end,                                mode = { "n", "x" } },
     { "<leader>fc",       function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end,   desc = "Find Config File" },
