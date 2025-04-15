@@ -1,4 +1,3 @@
--- not sure if this is better or worse than the one from snacks
 return {
 	"voldikss/vim-floaterm",
 	lazy = false,
@@ -28,6 +27,6 @@ return {
 			"<cmd>lua vim.g.toggle_float_term()<CR>",
 			{ noremap = true, silent = true }
 		)
-		vim.api.nvim_set_keymap("t", "<C-\\>", "<C-\\><C-n>:FloatermHide<CR>", { noremap = true, silent = true })
+		vim.api.nvim_set_keymap("t", "<C-t>", "<C-\\><C-n>:FloatermHide<CR>", { noremap = true, silent = true })
 	end,
 }

@@ -1,3 +1,4 @@
+--super sick and helps you learn the keybinds
 return {
 	"folke/which-key.nvim",
 	event = "VeryLazy",

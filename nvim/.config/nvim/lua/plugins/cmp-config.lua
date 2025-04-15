@@ -42,6 +42,7 @@ return {
 				}),
 			},
 			mapping = cmp.mapping.preset.insert({
+				--@edit
 				["<C-d>"] = cmp.mapping.scroll_docs(-4),
 				["<C-f>"] = cmp.mapping.scroll_docs(4),
 				["<C-Space>"] = cmp.mapping.complete(),
@@ -49,6 +50,7 @@ return {
 					behavior = cmp.ConfirmBehavior.Replace,
 					select = true,
 				}),
+				-- my attempt at turning off the completion conflict on tab
 				["<A-Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_next_item()
@@ -67,6 +69,7 @@ return {
 						fallback()
 					end
 				end, { "i", "s" }),
+				--allows for vim motion within the completion window with the control key
 				["<C-j>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_next_item()

@@ -1,4 +1,3 @@
---all copypasted from internet
 return {
 	"numToStr/Comment.nvim",
 	opts = {
