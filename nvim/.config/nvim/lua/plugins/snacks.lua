@@ -69,7 +69,7 @@ return {
     { "<leader>fg",       function() Snacks.picker.grep(excludeArgs) end,                           desc = "Grep Files" },
     { "<leader>fw",       function() Snacks.picker.grep_word() end,                                 mode = { "n", "x" } },
     -- { "<leader>ft",       function() Snacks.picker.treesitter() end,                                mode = { "n", "x" } },
-    { "<leader>fc",       function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end,   desc = "Find Config File" },
+    { "<leader>fc",       function() Snacks.picker.files({ cwd = "~/dotfiles/nvim/.config/nvim/" }) end,   desc = "Find Config File" },
     { "<leader>fd",       function() Snacks.picker.files({ cwd = "~/dotfiles", hidden = true }) end, desc = "Find Config File" },
     { "<leader>fm",       function() Snacks.picker.man() end,                                       desc = "Cwd Diagnostics" },
     { "<C-n>",            function() Snacks.explorer() end,                                         desc = "Explorer" },
