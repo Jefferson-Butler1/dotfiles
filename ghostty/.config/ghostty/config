@@ -47,10 +47,10 @@ keybind = ctrl+s>p>d=new_split:down
 keybind = ctrl+s>p>f=toggle_split_zoom
 
 keybind = alt>equal=equalize_splits
-keybind = alt>,=resize_split:left,10
-keybind = alt>.=resize_split:right,10
-keybind = alt>6=resize_split:up,10
-keybind = alt>7=resize_split:down,10
+keybind = alt>h=resize_split:left,10
+keybind = alt>l=resize_split:right,10
+keybind = alt>k=resize_split:up,10
+keybind = alt>j=resize_split:down,10
 
 # -= Navigation =-
 

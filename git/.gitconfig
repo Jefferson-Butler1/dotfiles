@@ -19,7 +19,7 @@
     fileMode = false
 
 [diff]
-  algorithm = patience
+  algorithm = minimal
   compactionHeuristic = true
   tool = nvimdiff
 	indentHeuristic = true

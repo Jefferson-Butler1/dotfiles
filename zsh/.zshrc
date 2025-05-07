@@ -116,6 +116,8 @@ eval "$(starship init zsh)"
 # Enable completion system
 autoload -Uz compinit && compinit
 alias dc="docker ps --format 'table {{.ID}}\t{{.CreatedAt}}\t{{.Status}}\t{{.Names}}'"
+alias be="cd $OE/v3-nest; lsof -ti :8080 | xargs kill && yarn install && yarn run dev; popd"
+alias fe="cd $OE/v3-monorepo; lsof -ti :9191 -o -ti :9090 | xargs kill && yarn install && yarn run all-dev; popd"
 
 alias fp="ps au | fzf"
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
@@ -123,3 +125,11 @@ export PATH="/usr/local/opt/postgresql@16/bin:$PATH"
 alias st=speedtest
 . "$HOME/.cargo/env"
 export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/Users/jeff/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
