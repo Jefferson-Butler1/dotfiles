@@ -71,3 +71,42 @@ vim.api.nvim_create_user_command("BDA", function()
   vim.fn.expand("%bd|e#")
 end, {})
 vim.cmd("cabbrev bda BDA")
+
+-- Map Alt+j to scroll down in all windows
+vim.keymap.set("n", "<A-j>", function()
+  local current_win = vim.api.nvim_get_current_win()
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    if vim.api.nvim_win_is_valid(win) then
+      vim.api.nvim_set_current_win(win)
+      vim.cmd("normal! <C-e>")
+    end
+  end
+  vim.api.nvim_set_current_win(current_win)
+end, { silent = true, desc = "Scroll all windows down" })
+
+-- Map Alt+k to scroll up in all windows
+vim.keymap.set("n", "<A-k>", function()
+  local current_win = vim.api.nvim_get_current_win()
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    if vim.api.nvim_win_is_valid(win) then
+      vim.api.nvim_set_current_win(win)
+      vim.cmd("normal! <C-y>")
+    end
+  end
+  vim.api.nvim_set_current_win(current_win)
+end, { silent = true, desc = "Scroll all windows up" })
+
+-- Add a mapping to reload the lazy.nvim configuration
+vim.keymap.set("n", "<leader>rl", function()
+  -- Reload the main Lua modules
+  for _, module in ipairs({ "vim-options", "plugins" }) do
+    package.loaded[module] = nil
+    require(module)
+  end
+
+  -- Clean and reload the lazy.nvim plugin manager
+  vim.cmd("Lazy sync")
+
+  -- Notify the user
+  vim.notify("Neovim configuration reloaded!", vim.log.levels.INFO)
+end, { desc = "Reload configuration" })
