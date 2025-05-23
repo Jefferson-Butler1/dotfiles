@@ -1,7 +1,5 @@
 {
-  "diagnostics.globals": ["opts", "vim", "snacks",
-        "Snacks"],
-    "diagnostics.disable": [
-        "unused-local"
+    "diagnostics.globals": [
+        "Snacks"
     ]
 }
