@@ -1,82 +1,125 @@
 return {
-  "hrsh7th/nvim-cmp",
-  dependencies = {
-    "hrsh7th/cmp-nvim-lsp",
-    "L3MON4D3/LuaSnip",
-    "saadparwaiz1/cmp_luasnip",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-path",
-    "onsails/lspkind.nvim",
-    {
-      "windwp/nvim-autopairs",
-      config = function()
-        require("nvim-autopairs").setup({})
-      end,
-    },
+  -- Disable nvim-cmp in favor of blink.cmp
+  {
+    "hrsh7th/nvim-cmp",
+    enabled = false,
   },
-  config = function()
-    local cmp = require("cmp")
-    local luasnip = require("luasnip")
-    local lspkind = require("lspkind")
-    cmp.setup({
-      snippet = {
-        expand = function(args)
-          luasnip.lsp_expand(args.body)
+  {
+    "hrsh7th/cmp-nvim-lsp", 
+    enabled = false,
+  },
+  {
+    "hrsh7th/cmp-buffer",
+    enabled = false,
+  },
+  {
+    "hrsh7th/cmp-path",
+    enabled = false,
+  },
+  {
+    "saadparwaiz1/cmp_luasnip",
+    enabled = false,
+  },
+  
+  -- Keep autopairs but remove cmp integration
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = function()
+      require("nvim-autopairs").setup({})
+    end,
+  },
+
+  -- Blink.cmp - ultra-fast completion engine
+  {
+    "saghen/blink.cmp",
+    version = "*",
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+      -- Keep LuaSnip for snippet expansion
+      "L3MON4D3/LuaSnip",
+    },
+    event = "InsertEnter",
+    
+    opts = {
+      snippets = {
+        expand = function(snippet)
+          require("luasnip").lsp_expand(snippet)
+        end,
+        active = function(filter)
+          if filter and filter.direction then
+            return require("luasnip").jumpable(filter.direction)
+          end
+          return require("luasnip").in_snippet()
+        end,
+        jump = function(direction)
+          require("luasnip").jump(direction)
         end,
       },
-      window = {
-        completion = cmp.config.window.bordered({
-          border = "rounded",
-          winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
-        }),
-        documentation = cmp.config.window.bordered({
-          border = "rounded",
-          winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
-        }),
+      
+      appearance = {
+        use_nvim_cmp_as_default = false,
+        nerd_font_variant = "mono",
       },
-      formatting = {
-        format = lspkind.cmp_format({
-          mode = "symbol",
-          maxwidth = 50,
-          ellipsis_char = "...",
-        }),
+      
+      completion = {
+        accept = {
+          auto_brackets = {
+            enabled = true,
+          },
+        },
+        menu = {
+          border = "rounded",
+          draw = {
+            treesitter = { "lsp" },
+          },
+        },
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 200,
+          window = {
+            border = "rounded",
+          },
+        },
+        ghost_text = {
+          enabled = false,
+        },
       },
-      mapping = cmp.mapping.preset.insert({
-        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-Space>"] = cmp.mapping.complete(),
-        ["<CR>"] = cmp.mapping.confirm({
-          behavior = cmp.ConfirmBehavior.Replace,
-          select = true,
-        }),
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-      }),
-      sources = cmp.config.sources({
-        { name = "nvim_lsp" },
-        { name = "luasnip" },
-        { name = "buffer" },
-        { name = "path" },
-      }),
-    })
-    -- Set up auto-pairs
-    local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-    cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-  end,
+
+      sources = {
+        default = { "lsp", "path", "snippets", "buffer" },
+      },
+
+      keymap = {
+        preset = "enter",
+        ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+        ["<C-e>"] = { "hide" },
+        ["<C-y>"] = { "select_and_accept" },
+        
+        -- Navigation with j/k
+        ["<C-j>"] = { "select_next", "fallback" },
+        ["<C-k>"] = { "select_prev", "fallback" },
+        
+        ["<Tab>"] = {
+          function(cmp)
+            if cmp.snippet_active() then
+              return cmp.accept()
+            else
+              return cmp.select_next()
+            end
+          end,
+          "snippet_forward",
+          "fallback",
+        },
+        ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+        
+        ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+        ["<C-d>"] = { "scroll_documentation_up", "fallback" },
+      },
+    },
+    
+    config = function(_, opts)
+      require("blink.cmp").setup(opts)
+    end,
+  },
 }
