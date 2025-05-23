@@ -4,27 +4,12 @@ local termconf = {
     style = "terminal",
     border = "rounded",
     width = 0.8,
-    heisnaght = 0.7,
+    height = 0.7,
     row = 0.15,
     col = 0.15,
   }
 }
 
-local excludeArgs = {
-      hidden = true,    -- Include hidden files
-      ignored = true,   -- Include ignored files (based on .gitignore)
-      exclude = {
-        "node_modules",
-        "dist",
-        "build",
-        "target",       -- Rust build directory
-        "vendor",       -- Go vendor directory
-        ".git",
-        "*.min.js",
-        "*.lock",
-        "*/tmp/*"
-      }
-    }
 
 
 return {
@@ -65,14 +50,14 @@ return {
     { "<leader>sn",       function() Snacks.scratch() end,                                          desc = "Toggle Scratch Buffer" },
     { "<leader>ss",       function() Snacks.scratch.select() end,                                   desc = "Select Scratch Buffer" },
     { "<leader>gl",       function() Snacks.lazygit.log_file() end,                                 desc = "Lazygit Log (cwd)" },
-    { "<leader>gb",       function() Snacks.git.blame_line() end,                                   desc = "Git Blame" },
+    -- { "<leader>gb",       function() Snacks.git.blame_line() end,                                   desc = "Git Blame" }, -- Using Gitsigns <leader>hb instead
     { "<C-g>",            function() Snacks.lazygit() end,                                          desc = "Lazygit" },
     { "<leader><leader>", function() Snacks.picker.smart() end,                                     desc = "Smart Files" },
     { "<leader>ff",       function() Snacks.picker.pick("files") end,                               desc = "Find Files" },
     { "<leader>fh",       function() Snacks.picker.help() end,                                      desc = "Help Pages" },
     { "<leader>fr",       function() Snacks.picker.recent() end,                                    desc = "Find Recent Files" },
     { "<leader>fb",       function() Snacks.picker.buffers() end,                                   desc = "Buffers" },
-    { "<leader>fg",       function() Snacks.picker.grep(excludeArgs) end,                           desc = "Grep Files" },
+    { "<leader>fg",       function() Snacks.picker.grep() end, desc = "Grep Files" },
     { "<leader>fw",       function() Snacks.picker.grep_word() end,                                 mode = { "n", "x" } },
     { "<leader>ft",       function() Snacks.picker.treesitter() end,                                mode = { "n", "x" } },
     { "<leader>fc",       function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end,   desc = "Find Config File" },
@@ -87,8 +72,6 @@ return {
     { "<leader>dd",       function() Snacks.picker.diagnostics() end,                               desc = "Cwd Diagnostics" },
     { "<leader>db",       function() Snacks.picker.diagnostics_buffer() end,                        desc = "Buffer Diagnostics" },
     { "<C-\\>",           function() Snacks.terminal.toggle(vim.o.shell, termconf) end,             desc = "Toggle Floating Terminal",            mode = { "n", "t" } },
-    { "<leader>bda",      function()
-      vim.cmd('bufdo bd')
-      Snacks.dashboard()
-    end,                                                                                            desc = "Close All Buffers and Show Dashboard" }, },
+    { "<leader>bda",      function() vim.cmd('bufdo bd') Snacks.dashboard() end,                    desc = "Close All Buffers and Show Dashboard" },
+  },
 }

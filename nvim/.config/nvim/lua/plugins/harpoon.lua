@@ -1,42 +1,54 @@
 return {
   "ThePrimeagen/harpoon",
+  branch = "harpoon2",
   dependencies = {
     "nvim-lua/plenary.nvim",
   },
   config = function()
-    local mark = require("harpoon.mark")
-    local ui = require("harpoon.ui")
-    require("harpoon").setup({
-      menu = {
-        width = math.floor(vim.api.nvim_win_get_width(0) * 0.8),
+    local harpoon = require("harpoon")
+    harpoon:setup({
+      settings = {
+        save_on_toggle = false,
+        sync_on_ui_close = false,
       },
     })
-    vim.keymap.set("n", "<leader>a", mark.add_file)
-    vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
+
+    -- Basic telescope configuration for harpoon v2
+    local conf = require("telescope.config").values
+    local function toggle_telescope(harpoon_files)
+      local file_paths = {}
+      for _, item in ipairs(harpoon_files.items) do
+        table.insert(file_paths, item.value)
+      end
+
+      require("telescope.pickers").new({}, {
+        prompt_title = "Harpoon",
+        finder = require("telescope.finders").new_table({
+          results = file_paths,
+        }),
+        previewer = conf.file_previewer({}),
+        sorter = conf.generic_sorter({}),
+      }):find()
+    end
+
+    vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
+    vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 
     -- Navigate to specific files
-    vim.keymap.set("n", "<leader>h1", function()
-      ui.nav_file(1)
-    end)
-    vim.keymap.set("n", "<leader>h2", function()
-      ui.nav_file(2)
-    end)
-    vim.keymap.set("n", "<leader>h3", function()
-      ui.nav_file(3)
-    end)
-    vim.keymap.set("n", "<leader>h4", function()
-      ui.nav_file(4)
-    end)
+    vim.keymap.set("n", "<leader>h1", function() harpoon:list():select(1) end)
+    vim.keymap.set("n", "<leader>h2", function() harpoon:list():select(2) end)
+    vim.keymap.set("n", "<leader>h3", function() harpoon:list():select(3) end)
+    vim.keymap.set("n", "<leader>h4", function() harpoon:list():select(4) end)
 
-    -- Sequential navigation
-    vim.keymap.set("n", "<leader>hn", ui.nav_next)
-    vim.keymap.set("n", "<leader>hp", ui.nav_prev)
+    -- Sequential navigation (changed to avoid Gitsigns conflict)
+    vim.keymap.set("n", "<leader>H[", function() harpoon:list():prev() end)
+    vim.keymap.set("n", "<leader>H]", function() harpoon:list():next() end)
 
     -- File management
-    vim.keymap.set("n", "<leader>hd", mark.rm_file)
-    vim.keymap.set("n", "<leader>hD", mark.clear_all)
+    vim.keymap.set("n", "<leader>hd", function() harpoon:list():remove() end)
+    vim.keymap.set("n", "<leader>hD", function() harpoon:list():clear() end)
 
-    -- Telescope integration
-    vim.keymap.set("n", "<leader>hm", ":Telescope harpoon marks<CR>")
+    -- Telescope integration (commented out since telescope is removed)
+    -- vim.keymap.set("n", "<leader>hm", function() toggle_telescope(harpoon:list()) end)
   end,
 }
