@@ -31,8 +31,8 @@ return {
       }):find()
     end
 
-    vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
-    vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+    vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end)
+    vim.keymap.set("n", "<leader>hm", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 
     -- Navigate to specific files
     vim.keymap.set("n", "<leader>h1", function() harpoon:list():select(1) end)
@@ -40,13 +40,13 @@ return {
     vim.keymap.set("n", "<leader>h3", function() harpoon:list():select(3) end)
     vim.keymap.set("n", "<leader>h4", function() harpoon:list():select(4) end)
 
-    -- Sequential navigation (changed to avoid Gitsigns conflict)
-    vim.keymap.set("n", "<leader>H[", function() harpoon:list():prev() end)
-    vim.keymap.set("n", "<leader>H]", function() harpoon:list():next() end)
+    -- Sequential navigation
+    vim.keymap.set("n", "<leader>hp", function() harpoon:list():prev() end)
+    vim.keymap.set("n", "<leader>hn", function() harpoon:list():next() end)
 
     -- File management
-    vim.keymap.set("n", "<leader>hd", function() harpoon:list():remove() end)
-    vim.keymap.set("n", "<leader>hD", function() harpoon:list():clear() end)
+    vim.keymap.set("n", "<leader>hr", function() harpoon:list():remove() end)
+    vim.keymap.set("n", "<leader>hc", function() harpoon:list():clear() end)
 
     -- Telescope integration (commented out since telescope is removed)
     -- vim.keymap.set("n", "<leader>hm", function() toggle_telescope(harpoon:list()) end)

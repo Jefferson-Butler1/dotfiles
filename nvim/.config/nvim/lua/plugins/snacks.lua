@@ -49,9 +49,8 @@ return {
   keys = {
     { "<leader>sn",       function() Snacks.scratch() end,                                          desc = "Toggle Scratch Buffer" },
     { "<leader>ss",       function() Snacks.scratch.select() end,                                   desc = "Select Scratch Buffer" },
-    { "<leader>gl",       function() Snacks.lazygit.log_file() end,                                 desc = "Lazygit Log (cwd)" },
-    -- { "<leader>gb",       function() Snacks.git.blame_line() end,                                   desc = "Git Blame" }, -- Using Gitsigns <leader>hb instead
-    { "<C-g>",            function() Snacks.lazygit() end,                                          desc = "Lazygit" },
+    { "<leader>gl",       function() Snacks.lazygit.log_file() end,                                 desc = "Git: Lazygit Log (cwd)" },
+    { "<leader>gg",       function() Snacks.lazygit() end,                                          desc = "Git: Lazygit" },
     { "<leader><leader>", function() Snacks.picker.smart() end,                                     desc = "Smart Files" },
     { "<leader>ff",       function() Snacks.picker.pick("files") end,                               desc = "Find Files" },
     { "<leader>fh",       function() Snacks.picker.help() end,                                      desc = "Help Pages" },
@@ -63,7 +62,7 @@ return {
     { "<leader>fc",       function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end,   desc = "Find Config File" },
     { "<leader>fd",       function() Snacks.picker.files({ cwd = "~/dotfiles", hidden = true }) end, desc = "Find Config File" },
     { "<leader>fm",       function() Snacks.picker.man() end,                                       desc = "Cwd Diagnostics" },
-    { "<C-n>",            function() Snacks.explorer() end,                                         desc = "Explorer" },
+    { "<leader>e",        function() Snacks.explorer() end,                                         desc = "Explorer" },
     { "gd",               function() Snacks.picker.lsp_definitions() end,                           desc = "Goto Definition" },
     { "gD",               function() Snacks.picker.lsp_declarations() end,                          desc = "Goto Declaration" },
     { "gr",               function() Snacks.picker.lsp_references() end,                            desc = "References",                          nowait = true },
