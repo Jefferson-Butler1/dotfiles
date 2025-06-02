@@ -3,10 +3,7 @@ local termconf = {
     relative = "editor",
     style = "terminal",
     border = "rounded",
-    width = 0.8,
-    height = 0.7,
-    row = 0.15,
-    col = 0.15,
+    cwd = vim.fn.getcwd(),
   }
 }
 
@@ -71,6 +68,8 @@ return {
     { "<leader>dd",       function() Snacks.picker.diagnostics() end,                               desc = "Cwd Diagnostics" },
     { "<leader>db",       function() Snacks.picker.diagnostics_buffer() end,                        desc = "Buffer Diagnostics" },
     { "<C-\\>",           function() Snacks.terminal.toggle(vim.o.shell, termconf) end,             desc = "Toggle Floating Terminal",            mode = { "n", "t" } },
+    { "<leader>tc",       function() Snacks.terminal.toggle("claude", termconf) end,                desc = "Toggle ClaudeTerminal",            mode = { "n", "t" } },
+    { "<leader>tm",       function() Snacks.terminal.toggle("mprocs fe be", termconf) end,          desc = "Toggle Mprocs terminal",            mode = { "n", "t" } },
     { "<leader>bda",      function() vim.cmd('bufdo bd') Snacks.dashboard() end,                    desc = "Close All Buffers and Show Dashboard" },
   },
 }

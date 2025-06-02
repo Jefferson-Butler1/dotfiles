@@ -63,3 +63,6 @@ keybind = cmd+l=goto_split:right
 # Prompt navigation
 keybind = alt+k=jump_to_prompt:-1
 keybind = alt+j=jump_to_prompt:1
+
+keybind = cmd+enter=unbind
+keybind = shift+enter=text:\n

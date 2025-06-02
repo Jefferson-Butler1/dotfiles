@@ -5,7 +5,7 @@ return {
     enabled = false,
   },
   {
-    "hrsh7th/cmp-nvim-lsp", 
+    "hrsh7th/cmp-nvim-lsp",
     enabled = false,
   },
   {
@@ -20,7 +20,7 @@ return {
     "saadparwaiz1/cmp_luasnip",
     enabled = false,
   },
-  
+
   -- Keep autopairs but remove cmp integration
   {
     "windwp/nvim-autopairs",
@@ -40,7 +40,7 @@ return {
       "L3MON4D3/LuaSnip",
     },
     event = "InsertEnter",
-    
+
     opts = {
       snippets = {
         expand = function(snippet)
@@ -56,12 +56,12 @@ return {
           require("luasnip").jump(direction)
         end,
       },
-      
+
       appearance = {
         use_nvim_cmp_as_default = false,
         nerd_font_variant = "mono",
       },
-      
+
       completion = {
         accept = {
           auto_brackets = {
@@ -95,29 +95,13 @@ return {
         ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
         ["<C-e>"] = { "hide" },
         ["<C-y>"] = { "select_and_accept" },
-        
+
         -- Navigation with j/k
         ["<C-j>"] = { "select_next", "fallback" },
         ["<C-k>"] = { "select_prev", "fallback" },
-        
-        ["<Tab>"] = {
-          function(cmp)
-            if cmp.snippet_active() then
-              return cmp.accept()
-            else
-              return cmp.select_next()
-            end
-          end,
-          "snippet_forward",
-          "fallback",
-        },
-        ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
-        
-        ["<C-f>"] = { "scroll_documentation_down", "fallback" },
-        ["<C-d>"] = { "scroll_documentation_up", "fallback" },
       },
     },
-    
+
     config = function(_, opts)
       require("blink.cmp").setup(opts)
     end,
