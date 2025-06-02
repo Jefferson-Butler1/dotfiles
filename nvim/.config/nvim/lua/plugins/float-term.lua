@@ -21,12 +21,12 @@ return {
 		vim.g.floaterm_autoclose = 2 -- Close on exit
 
 		-- Keybindings (simplified)
-		vim.api.nvim_set_keymap(
-			"n",
-			"<C-t>",
-			"<cmd>lua vim.g.toggle_float_term()<CR>",
-			{ noremap = true, silent = true }
-		)
-		vim.api.nvim_set_keymap("t", "<C-t>", "<C-\\><C-n>:FloatermHide<CR>", { noremap = true, silent = true })
+		-- vim.api.nvim_set_keymap(
+		-- 	"n",
+		-- 	"<C-t>",
+		-- 	"<cmd>lua vim.g.toggle_float_term()<CR>",
+		-- 	{ noremap = true, silent = true }
+		-- )
+		-- vim.api.nvim_set_keymap("t", "<C-t>", "<C-\\><C-n>:FloatermHide<CR>", { noremap = true, silent = true })
 	end,
 }

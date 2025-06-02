@@ -25,16 +25,16 @@ return {
 		create_pio_command("PioBoards", "boards esp32", "List ESP32 boards")
 		create_pio_command("PioInit", "project init --board esp32dev", "Initialize new ESP32 project")
 
-		-- Key mappings for PlatformIO commands
-		vim.keymap.set("n", "<leader>pa", "<cmd>PioBuild<CR>", { desc = "PlatformIO Build" })
-		vim.keymap.set("n", "<leader>pu", "<cmd>PioUpload<CR>", { desc = "PlatformIO Upload" })
-		vim.keymap.set("n", "<leader>pc", "<cmd>PioClean<CR>", { desc = "PlatformIO Clean" })
-		vim.keymap.set("n", "<leader>pt", "<cmd>PioTest<CR>", { desc = "PlatformIO Test" })
-		vim.keymap.set("n", "<leader>pm", "<cmd>PioMonitor<CR>", { desc = "PlatformIO Serial Monitor" })
-		vim.keymap.set("n", "<leader>pd", "<cmd>PioDebug<CR>", { desc = "PlatformIO Debug" })
-		vim.keymap.set("n", "<leader>pl", "<cmd>PioLibs<CR>", { desc = "PlatformIO Libraries" })
-		vim.keymap.set("n", "<leader>pb", "<cmd>PioBoards<CR>", { desc = "PlatformIO Boards" })
-		vim.keymap.set("n", "<leader>pi", "<cmd>PioInit<CR>", { desc = "PlatformIO Init Project" })
+		-- Key mappings for Arduino/PlatformIO commands (using <leader>ar prefix)
+		vim.keymap.set("n", "<leader>arb", "<cmd>PioBuild<CR>", { desc = "Arduino: Build" })
+		vim.keymap.set("n", "<leader>aru", "<cmd>PioUpload<CR>", { desc = "Arduino: Upload" })
+		vim.keymap.set("n", "<leader>arc", "<cmd>PioClean<CR>", { desc = "Arduino: Clean" })
+		vim.keymap.set("n", "<leader>art", "<cmd>PioTest<CR>", { desc = "Arduino: Test" })
+		vim.keymap.set("n", "<leader>arm", "<cmd>PioMonitor<CR>", { desc = "Arduino: Serial Monitor" })
+		vim.keymap.set("n", "<leader>ard", "<cmd>PioDebug<CR>", { desc = "Arduino: Debug" })
+		vim.keymap.set("n", "<leader>arl", "<cmd>PioLibs<CR>", { desc = "Arduino: Libraries" })
+		vim.keymap.set("n", "<leader>arB", "<cmd>PioBoards<CR>", { desc = "Arduino: Boards" })
+		vim.keymap.set("n", "<leader>ari", "<cmd>PioInit<CR>", { desc = "Arduino: Init Project" })
 
 		-- Set filetype for Arduino and PlatformIO files
 		vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
@@ -102,6 +102,6 @@ For more info: https://docs.platformio.org/en/latest/tutorials/espressif32/ardui
 			vim.api.nvim_buf_set_option(buf, "bufhidden", "wipe")
 		end, {})
 
-		vim.keymap.set("n", "<leader>ps", "<cmd>ArduinoSetup<CR>", { desc = "PlatformIO Setup Instructions" })
+		vim.keymap.set("n", "<leader>ars", "<cmd>ArduinoSetup<CR>", { desc = "Arduino: Setup Instructions" })
 	end,
 }

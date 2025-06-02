@@ -33,7 +33,7 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 20
 
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights" })
 
 vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
@@ -99,10 +99,8 @@ end, { silent = true, desc = "Scroll all windows up" })
 -- Add a mapping to reload the lazy.nvim configuration
 vim.keymap.set("n", "<leader>rl", function()
   -- Reload the main Lua modules
-  for _, module in ipairs({ "vim-options", "plugins" }) do
-    package.loaded[module] = nil
-    require(module)
-  end
+  package.loaded["vim-options"] = nil
+  require("vim-options")
 
   -- Clean and reload the lazy.nvim plugin manager
   vim.cmd("Lazy sync")
