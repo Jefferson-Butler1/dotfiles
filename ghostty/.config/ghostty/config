@@ -1,6 +1,6 @@
 # theme = light:rose-pine-dawn,dark:rose-pine
 # theme = catppuccin-frappe
-macos-titlebar-style = tabs
+macos-titlebar-style = hidden
 font-size = 13
 title = ""
 

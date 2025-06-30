@@ -16,8 +16,8 @@ return {
     -- Global LSP keymaps (Mason handles server setup)
     vim.keymap.set("n", "<leader>dc", vim.diagnostic.open_float, { desc = "Show diagnostic" })
     vim.keymap.set("n", "rn", vim.lsp.buf.rename, { desc = "Rename" })
-    vim.keymap.set("n", "<D-.>", vim.lsp.buf.code_action, { desc = "code_action" })
-    
+    vim.keymap.set("n", "<leader>.", vim.lsp.buf.code_action, { desc = "code_action" })
+
     -- Diagnostic configuration
     vim.diagnostic.config({
       virtual_text = true,

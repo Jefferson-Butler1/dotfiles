@@ -1,3 +1,9 @@
+# NVM configuration
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+export PATH="$NVM_DIR/versions/node/v22.13.1/bin:$PATH"
+
 # Path to your Oh My Zsh installation
 export ZSH="$HOME/.oh-my-zsh"       # REQUIRED FOR MACOS
 # export ZSH="/usr/share/oh-my-zsh" # REQUIRED FOR LINUX
@@ -105,10 +111,6 @@ $SCRIPTS/create_symlinks.sh
 
 export PATH=$HOME/.local/bin:$PATH
 
-# NVM configuration
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # Initialize starship prompt
 eval "$(starship init zsh)"
@@ -116,8 +118,9 @@ eval "$(starship init zsh)"
 # Enable completion system
 autoload -Uz compinit && compinit
 alias dc="docker ps --format 'table {{.ID}}\t{{.CreatedAt}}\t{{.Status}}\t{{.Names}}'"
-alias be="cd $OE/v3-nest; lsof -ti :8080 | xargs kill && yarn install && yarn run dev; popd"
-alias fe="cd $OE/v3-monorepo; lsof -ti :9191 -o -ti :9090 | xargs kill && yarn install && yarn run all-dev; popd"
+# alias be="cd $OE/.v3/v3-nest; lsof -ti :8080 | xargs kill && yarn install && yarn run dev; popd"
+# alias fe="cd $OE/.v3/v3-monorepo; lsof -ti :9191 -o -ti :9090 | xargs kill && nvm use 22.13.1 && yarn install && yarn run all-dev; popd"
+alias run="mprocs fe be"
 
 alias fp="ps au | fzf"
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
@@ -126,10 +129,4 @@ alias st=speedtest
 . "$HOME/.cargo/env"
 export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
 
-# pnpm
-export PNPM_HOME="/Users/jeff/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
+alias claude="/Users/jeff/.claude/local/claude"
