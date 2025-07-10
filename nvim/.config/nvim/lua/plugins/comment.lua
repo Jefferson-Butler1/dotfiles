@@ -1,5 +1,8 @@
 return {
 	"numToStr/Comment.nvim",
+	dependencies = {
+		"JoosepAlviste/nvim-ts-context-commentstring",
+	},
 	opts = {
 		-- add any options here
 	},
@@ -43,7 +46,7 @@ return {
 				extra = true,
 			},
 			---Function to call before (un)comment
-			pre_hook = nil,
+			pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
 			---Function to call after (un)comment
 			post_hook = nil,
 		})

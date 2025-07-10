@@ -33,9 +33,20 @@ return {
                 "graphql",
                 "prismals",
                 "eslint",
+                "tailwindcss",
+                "rust_analyzer",
+                "gopls",
+                "golangci_lint_ls",
             },
             -- automatically install LSPs with default config
             handlers = {
+                ["ts_ls"] = function()
+                    require("lspconfig").ts_ls.setup({
+                        root_dir = require("lspconfig.util").root_pattern("package.json", "tsconfig.json", ".git"),
+                        single_file_support = false,
+                    })
+                end,
+                -- Default handler for other servers
                 function(server_name)
                     require("lspconfig")[server_name].setup({})
                 end,
@@ -47,6 +58,7 @@ return {
                 "prettier", -- prettier formatter
                 "stylua", -- lua formatter
                 "eslint_d",
+                "rustfmt", -- rust formatter
             },
         })
     end,
