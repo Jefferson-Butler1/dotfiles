@@ -129,4 +129,7 @@ alias st=speedtest
 . "$HOME/.cargo/env"
 export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
 
+alias usage="while npx ccusage daily --since $(date  +%Y%m%d); do sleep 5; clear; done"
+
 alias claude="/Users/jeff/.claude/local/claude"
+alias upgrade='brew update && brew upgrade --greedy && brew upgrade --cask --greedy'

@@ -68,7 +68,7 @@ end, {})
 vim.cmd("cabbrev cwd CWD")
 
 vim.api.nvim_create_user_command("BDA", function()
-  vim.fn.expand("%bd|e#")
+  vim.cmd("bufdo bd")
 end, {})
 vim.cmd("cabbrev bda BDA")
 
