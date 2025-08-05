@@ -13,6 +13,7 @@ adjust-cell-height = 20%
 adjust-underline-position = 6
 adjust-underline-thickness = 40%
 adjust-cursor-thickness = 150%
+cursor-invert-fg-bg = true
 confirm-close-surface = false
 
 # -= Keybinds =-
