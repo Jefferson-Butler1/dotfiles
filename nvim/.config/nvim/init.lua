@@ -177,7 +177,7 @@ require "auto-session".setup(
 local Terminal = require('toggleterm.terminal').Terminal
 lazygit        = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
 term           = Terminal:new({ hidden = true, direction = "float" })
-claude         = Terminal:new({ cmd = "claude --resume", hidden = true, direction = "float" })
+claude         = Terminal:new({ cmd = "~/.claude/local/claude", direction = "float" })
 
 vim.keymap.set({ "n", "t" }, "<leader>tt", "<CMD>lua term:toggle()<CR>")
 vim.keymap.set({ "n", "t" }, "<leader>tc", "<CMD>lua claude:toggle()<CR>")
