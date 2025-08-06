@@ -67,7 +67,7 @@ end, {})
 
 vim.api.nvim_create_user_command("Dark", function()
   vim.o.background = "dark"
-  vim.cmd.colorscheme "catppuccin-mocha"
+  vim.cmd.colorscheme "catppuccin-frappe"
 end, {})
 
 vim.api.nvim_create_user_command("Light", function()
