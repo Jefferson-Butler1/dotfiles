@@ -22,7 +22,7 @@ vim.o.smartcase      = true
 vim.o.list           = true
 vim.opt.listchars    = { tab = "» ", trail = "·", nbsp = "␣", extends = "›", precedes = "‹" }
 vim.o.winborder      = "rounded"
-vim.o.scrolloff      = 20
+vim.o.scrolloff      = 50
 vim.g.mapleader      = " "
 
 vim.api.nvim_create_autocmd("TextYankPost", { callback = vim.hl.on_yank })
@@ -54,6 +54,8 @@ vim.pack.add({
   { src = 'https://github.com/m4xshen/hardtime.nvim' },
   { src = "https://github.com/rmagatti/auto-session" },
   { src = "https://github.com/akinsho/toggleterm.nvim" },
+  { src = "https://github.com/sphamba/smear-cursor.nvim" },
+  { src = "https://github.com/folke/which-key.nvim" },
 })
 
 -- ============================================================================
@@ -108,6 +110,12 @@ vim.lsp.config("lua_ls",
 )
 
 vim.keymap.set("n", "<leader>bf", vim.lsp.buf.format)
+vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition)
+vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references)
+vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
+vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation)
+vim.keymap.set("n", "<leader>gt", vim.lsp.buf.type_definition)
 
 -- ============================================================================
 -- BLINK.CMP (COMPLETION)
@@ -138,12 +146,22 @@ vim.keymap.set('n', '<leader>dD', function()
   })
 end, { desc = 'Workspace diagnostics' })
 
-vim.keymap.set('n', '<leader>dc', vim.diagnostic.open_float)
+vim.keymap.set('n', '<leader>dc', vim.diagnostic.open_float, {desc="Diagnostic, current"})
 
 -- ============================================================================
 -- HARDTIME (MOVEMENT IMPROVEMENT)
 -- ============================================================================
 require("hardtime").setup({})
+
+-- ============================================================================
+-- SMEAR-CURSOR (CURSOR TRAILING EFFECT)
+-- ============================================================================
+require("smear_cursor").setup()
+
+-- ============================================================================
+-- WHICH-KEY
+-- ============================================================================
+require("which-key").setup()
 
 -- ============================================================================
 -- AUTO-SESSION
@@ -175,10 +193,10 @@ require "auto-session".setup(
 -- TOGGLE-TERM
 -- ============================================================================
 local Terminal = require('toggleterm.terminal').Terminal
-lazygit        = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
-term           = Terminal:new({ hidden = true, direction = "float" })
-claude         = Terminal:new({ cmd = "~/.claude/local/claude", direction = "float" })
+Lazygit        = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
+Term           = Terminal:new({ hidden = true, direction = "float" })
+Claude         = Terminal:new({ cmd = "~/.claude/local/claude --resume", direction = "float" })
 
-vim.keymap.set({ "n", "t" }, "<leader>tt", "<CMD>lua term:toggle()<CR>")
-vim.keymap.set({ "n", "t" }, "<leader>tc", "<CMD>lua claude:toggle()<CR>")
-vim.keymap.set({ "n", "t" }, "<leader>gg", "<CMD>lua lazygit:toggle()<CR>")
+vim.keymap.set({ "n", "t" }, "<leader>tt", "<CMD>lua Term:toggle()<CR>")
+vim.keymap.set({ "n", "t" }, "<leader>tc", "<CMD>lua Claude:toggle()<CR>")
+vim.keymap.set({ "n", "t" }, "<leader>gg", "<CMD>lua Lazygit:toggle()<CR>")
