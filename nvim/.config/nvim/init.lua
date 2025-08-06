@@ -35,38 +35,16 @@ vim.keymap.set('n', '<leader>q', ':quit<CR>')
 vim.keymap.set({ 'n', 'v', 'x' }, '<leader>y', '"+y<CR>')
 vim.keymap.set({ 'n', 'v', 'x' }, '<leader>p', '"+p<CR>')
 
--- Lazygit in floating terminal
-vim.keymap.set('n', '<leader>gg', function()
-  local width = math.floor(vim.o.columns * 0.9)
-  local height = math.floor(vim.o.lines * 0.9)
-  local row = math.floor((vim.o.lines - height) / 2)
-  local col = math.floor((vim.o.columns - width) / 2)
-  
-  local buf = vim.api.nvim_create_buf(false, true)
-  local win = vim.api.nvim_open_win(buf, true, {
-    relative = 'editor',
-    width = width,
-    height = height,
-    row = row,
-    col = col,
-    style = 'minimal',
-    border = 'rounded',
-  })
-  
-  vim.fn.termopen('lazygit', {
-    on_exit = function()
-      vim.api.nvim_win_close(win, true)
-    end,
-  })
-  
-  vim.cmd('startinsert')
-end, { desc = 'Open lazygit' })
 
 -- ============================================================================
 -- PLUGIN INSTALLATION
 -- ============================================================================
 vim.pack.add({
   { src = "https://github.com/vague2k/vague.nvim" },
+  { src = "https://github.com/saghen/blink.cmp" },
+  { src = "https://github.com/mason-org/mason.nvim" },
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+  { src = "https://github.com/mason-org/mason.nvim" },
   { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/catppuccin/nvim" },
   { src = "https://github.com/stevearc/oil.nvim" },
@@ -75,6 +53,7 @@ vim.pack.add({
   { src = 'https://github.com/MunifTanjim/nui.nvim' },
   { src = 'https://github.com/m4xshen/hardtime.nvim' },
   { src = "https://github.com/rmagatti/auto-session" },
+  { src = "https://github.com/akinsho/toggleterm.nvim" },
 })
 
 -- ============================================================================
@@ -108,19 +87,32 @@ vim.keymap.set('n', '<leader>e', ':Oil<CR>')
 -- ============================================================================
 -- LSP CONFIGURATION
 -- ============================================================================
-vim.lsp.enable({ "lua_ls", "ts_ls" })
+require "mason".setup()
+---@diagnostic disable-next-line: missing-fields
+require 'nvim-treesitter.configs'.setup {
+  ensure_installed = { "typescript", "tsx", "lua", "bash" },
+  highlight = { enable = true, },
+}
 
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(ev)
-    local client = vim.lsp.get_client_by_id(ev.data.client_id)
-    if client:supports_method('textDocument/completion') then
-      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-    end
-  end
-})
-vim.cmd("set completeopt+=noselect")
+vim.lsp.enable({ "lua_ls", "ts_ls" })
+vim.lsp.config("lua_ls",
+  {
+    settings = {
+      Lua = {
+        workspace = {
+          library = vim.api.nvim_get_runtime_file("", true),
+        }
+      }
+    }
+  }
+)
 
 vim.keymap.set("n", "<leader>bf", vim.lsp.buf.format)
+
+-- ============================================================================
+-- BLINK.CMP (COMPLETION)
+-- ============================================================================
+require('blink.cmp').setup()
 
 -- ============================================================================
 -- MINI.PICK (FUZZY FINDER)
@@ -136,15 +128,17 @@ vim.keymap.set("n", "<leader>fg", ":Pick grep_live<CR>")
 -- Document diagnostics using mini.extra
 vim.keymap.set('n', '<leader>dd', function()
   require('mini.extra').pickers.diagnostic({
-    scope = 'current'  -- Show diagnostics for current buffer only
+    scope = 'current' -- Show diagnostics for current buffer only
   })
 end, { desc = 'Document diagnostics' })
 
 vim.keymap.set('n', '<leader>dD', function()
   require('mini.extra').pickers.diagnostic({
-    scope = 'all'  -- Show diagnostics for all buffers
+    scope = 'all' -- Show diagnostics for all buffers
   })
 end, { desc = 'Workspace diagnostics' })
+
+vim.keymap.set('n', '<leader>dc', vim.diagnostic.open_float)
 
 -- ============================================================================
 -- HARDTIME (MOVEMENT IMPROVEMENT)
@@ -155,25 +149,33 @@ require("hardtime").setup({})
 -- AUTO-SESSION
 -- ============================================================================
 require "auto-session".setup({
-    auto_session_enable_last_session = false, -- Don't restore last session globally
-    auto_session_root_dir = vim.fn.stdpath('data') .. "/sessions/",
-    auto_session_enabled = true,
-    auto_restore_enabled = true,
-    auto_save_enabled = true,
-    auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
-    auto_session_use_git_branch = true,
+  auto_session_enable_last_session = false, -- Don't restore last session globally
+  auto_session_root_dir = vim.fn.stdpath('data') .. "/sessions/",
+  auto_session_enabled = true,
+  auto_restore_enabled = true,
+  auto_save_enabled = true,
+  auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+  auto_session_use_git_branch = true,
 
-    -- Session lens (optional - for browsing sessions)
-    session_lens = {
-      buftypes_to_ignore = {},
-      load_on_setup = true,
-      theme_conf = { border = true },
-      previewer = false,
-    },
+  -- Session lens (optional - for browsing sessions)
+  session_lens = {
+    buftypes_to_ignore = {},
+    load_on_setup = true,
+    theme_conf = { border = true },
+    previewer = false,
+  },
 
-    -- Auto save session on exit
-    auto_session_create_enabled = true,
+  -- Auto save session on exit
+  auto_session_create_enabled = true,
 
-    -- Log level (can be 'debug', 'info', 'warn', 'error')
-    log_level = 'error',
-  })
+  -- Log level (can be 'debug', 'info', 'warn', 'error')
+  log_level = 'error',
+})
+
+
+-- ============================================================================
+-- TOGGLE-TERM
+-- ============================================================================
+local Terminal  = require('toggleterm.terminal').Terminal
+lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction="float"})
+vim.api.nvim_set_keymap("n", "<leader>gg", "<CMD>lua lazygit:toggle()<CR>" , { noremap = true, silent = true })
