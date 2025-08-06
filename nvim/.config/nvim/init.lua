@@ -25,7 +25,7 @@ vim.o.winborder      = "rounded"
 vim.o.scrolloff      = 20
 vim.g.mapleader      = " "
 
-vim.api.nvim_create_autocmd("TextYankPost", { callback = vim.highlight.on_yank })
+vim.api.nvim_create_autocmd("TextYankPost", { callback = vim.hl.on_yank })
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 vim.keymap.set('n', '<leader>rl', ':update<CR> :source<CR>')
@@ -120,7 +120,7 @@ require('blink.cmp').setup()
 require "mini.pick".setup()
 require('mini.extra').setup()
 
-vim.keymap.set("n", "<leader>ff", ":Pick files<CR>")
+vim.keymap.set("n", "<leader>ff", ":Pick files <CR>")
 vim.keymap.set("n", "<leader>h", ":Pick help<CR>")
 vim.keymap.set("n", "<leader>fb", ":Pick buffers<CR>")
 vim.keymap.set("n", "<leader>fg", ":Pick grep_live<CR>")
@@ -148,34 +148,37 @@ require("hardtime").setup({})
 -- ============================================================================
 -- AUTO-SESSION
 -- ============================================================================
-require "auto-session".setup({
-  auto_session_enable_last_session = false, -- Don't restore last session globally
-  auto_session_root_dir = vim.fn.stdpath('data') .. "/sessions/",
-  auto_session_enabled = true,
-  auto_restore_enabled = true,
-  auto_save_enabled = true,
-  auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
-  auto_session_use_git_branch = true,
-
-  -- Session lens (optional - for browsing sessions)
-  session_lens = {
-    buftypes_to_ignore = {},
-    load_on_setup = true,
-    theme_conf = { border = true },
-    previewer = false,
-  },
-
-  -- Auto save session on exit
-  auto_session_create_enabled = true,
-
-  -- Log level (can be 'debug', 'info', 'warn', 'error')
-  log_level = 'error',
-})
+require "auto-session".setup(
+  {
+    auto_create = true,
+    auto_restore = true,
+    auto_restore_last_session = false,
+    auto_save = true,
+    enabled = true,
+    git_use_branch_name = true,
+    log_level = "error",
+    root_dir = "/Users/jeff/.local/share/nvim/sessions/",
+    session_lens = {
+      buftypes_to_ignore = {},
+      load_on_setup = true,
+      picker_opts = {
+        border = true
+      },
+      previewer = false
+    },
+    suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" }
+  }
+)
 
 
 -- ============================================================================
 -- TOGGLE-TERM
 -- ============================================================================
-local Terminal  = require('toggleterm.terminal').Terminal
-lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction="float"})
-vim.api.nvim_set_keymap("n", "<leader>gg", "<CMD>lua lazygit:toggle()<CR>" , { noremap = true, silent = true })
+local Terminal = require('toggleterm.terminal').Terminal
+lazygit        = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
+term           = Terminal:new({ hidden = true, direction = "float" })
+claude         = Terminal:new({ cmd = "claude --resume", hidden = true, direction = "float" })
+
+vim.keymap.set({ "n", "t" }, "<leader>tt", "<CMD>lua term:toggle()<CR>")
+vim.keymap.set({ "n", "t" }, "<leader>tc", "<CMD>lua claude:toggle()<CR>")
+vim.keymap.set({ "n", "t" }, "<leader>gg", "<CMD>lua lazygit:toggle()<CR>")
