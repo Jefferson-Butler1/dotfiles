@@ -133,3 +133,4 @@ alias usage="while npx ccusage daily --since $(date  +%Y%m%d); do sleep 5; clear
 
 alias claude="/Users/jeff/.claude/local/claude"
 alias upgrade='brew update && brew upgrade --greedy && brew upgrade --cask --greedy'
+export HOMEBREW_CASK_OPTS="--no-quarantine"
