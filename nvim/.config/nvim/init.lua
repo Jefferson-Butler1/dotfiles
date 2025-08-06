@@ -57,6 +57,7 @@ vim.pack.add({
   { src = "https://github.com/akinsho/toggleterm.nvim" },
   { src = "https://github.com/sphamba/smear-cursor.nvim" },
   { src = "https://github.com/folke/which-key.nvim" },
+  { src = "https://github.com/wakatime/vim-wakatime" },
 })
 
 -- ============================================================================
