@@ -50,6 +50,7 @@ vim.pack.add({
   { src = "https://github.com/stevearc/oil.nvim" },
   { src = "https://github.com/echasnovski/mini.pick" },
   { src = "https://github.com/echasnovski/mini.extra" },
+  { src = "https://github.com/echasnovski/mini.animate" },
   { src = 'https://github.com/MunifTanjim/nui.nvim' },
   { src = 'https://github.com/m4xshen/hardtime.nvim' },
   { src = "https://github.com/rmagatti/auto-session" },
@@ -127,6 +128,7 @@ require('blink.cmp').setup()
 -- ============================================================================
 require "mini.pick".setup()
 require('mini.extra').setup()
+require('mini.animate').setup()
 
 vim.keymap.set("n", "<leader>ff", ":Pick files <CR>")
 vim.keymap.set("n", "<leader>h", ":Pick help<CR>")
