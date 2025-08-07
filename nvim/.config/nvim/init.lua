@@ -28,7 +28,7 @@ vim.g.mapleader      = " "
 vim.api.nvim_create_autocmd("TextYankPost", { callback = vim.hl.on_yank })
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
-vim.keymap.set('n', '<leader>rl', ':update<CR> :source<CR>')
+vim.keymap.set('n', '<leader>rl', ':update<CR> :source ~/.config/nvim/init.lua<CR>')
 vim.keymap.set('n', '<leader>w', ':write<CR>')
 vim.keymap.set('n', '<leader>q', ':quit<CR>')
 
@@ -58,6 +58,9 @@ vim.pack.add({
   { src = "https://github.com/sphamba/smear-cursor.nvim" },
   { src = "https://github.com/folke/which-key.nvim" },
   { src = "https://github.com/wakatime/vim-wakatime" },
+  { src = "https://github.com/nvim-tree/nvim-web-devicons" },
+  { src = "https://github.com/nvim-lualine/lualine.nvim" },
+  { src = "https://github.com/rose-pine/neovim" },
 })
 
 -- ============================================================================
@@ -71,12 +74,12 @@ end, {})
 
 vim.api.nvim_create_user_command("Dark", function()
   vim.o.background = "dark"
-  vim.cmd.colorscheme "catppuccin-frappe"
+  vim.cmd.colorscheme "catppuccin-macchiato"
 end, {})
 
 vim.api.nvim_create_user_command("Light", function()
   vim.o.background = 'light'
-  vim.cmd.colorscheme "catppuccin-latte"
+  vim.cmd.colorscheme "rose-pine-dawn"
 end, {})
 
 -- Default color scheme
@@ -85,7 +88,11 @@ vim.cmd("Vague")
 -- ============================================================================
 -- FILE EXPLORER (OIL)
 -- ============================================================================
-require("oil").setup()
+require("oil").setup({
+  view_options = {
+    show_hidden = true,
+  },
+})
 vim.keymap.set('n', '<leader>e', ':Oil<CR>')
 
 -- ============================================================================
@@ -160,6 +167,23 @@ require("hardtime").setup({})
 -- SMEAR-CURSOR (CURSOR TRAILING EFFECT)
 -- ============================================================================
 require("smear_cursor").setup()
+
+-- ============================================================================
+-- LUALINE
+-- ============================================================================
+require("lualine").setup({
+  options = {
+    theme = "auto",
+  },
+  sections = {
+    lualine_a = { "mode" },
+    lualine_b = { "diff", "diagnostics" },
+    lualine_c = { "branch" },
+    lualine_x = { "lsp_status" },
+    lualine_y = { { "filename", path = 1 } },
+    lualine_z = { "progress", "location" },
+  },
+})
 
 -- ============================================================================
 -- WHICH-KEY
