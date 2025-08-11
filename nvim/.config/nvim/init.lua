@@ -61,6 +61,7 @@ vim.pack.add({
   { src = "https://github.com/nvim-tree/nvim-web-devicons" },
   { src = "https://github.com/nvim-lualine/lualine.nvim" },
   { src = "https://github.com/rose-pine/neovim" },
+  { src = "https://github.com/lewis6991/gitsigns.nvim" },
 })
 
 -- ============================================================================
@@ -125,6 +126,14 @@ vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
 vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation)
 vim.keymap.set("n", "<leader>gt", vim.lsp.buf.type_definition)
+
+-- Format on save
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function()
+    vim.lsp.buf.format({ timeout_ms = 2000 })
+  end,
+})
 
 -- ============================================================================
 -- BLINK.CMP (COMPLETION)
@@ -191,6 +200,18 @@ require("lualine").setup({
 require("which-key").setup()
 
 -- ============================================================================
+-- GITSIGNS
+-- ============================================================================
+require("gitsigns").setup({
+  current_line_blame = true,
+  current_line_blame_opts = {
+    virt_text_pos = "eol",
+    delay = 100,
+  },
+  current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
+})
+
+-- ============================================================================
 -- AUTO-SESSION
 -- ============================================================================
 require "auto-session".setup(
@@ -222,7 +243,7 @@ require "auto-session".setup(
 local Terminal = require('toggleterm.terminal').Terminal
 Lazygit        = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
 Term           = Terminal:new({ hidden = true, direction = "float" })
-Claude         = Terminal:new({ cmd = "~/.claude/local/claude --resume", direction = "float" })
+Claude         = Terminal:new({ cmd = "~/.claude/local/claude --resume || ~/.claude/local/claude", direction = "float" })
 
 vim.keymap.set({ "n", "t" }, "<leader>tt", "<CMD>lua Term:toggle()<CR>")
 vim.keymap.set({ "n", "t" }, "<leader>tc", "<CMD>lua Claude:toggle()<CR>")
