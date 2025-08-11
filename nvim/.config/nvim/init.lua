@@ -127,10 +127,16 @@ vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
 vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation)
 vim.keymap.set("n", "<leader>gt", vim.lsp.buf.type_definition)
 
--- Format on save
+-- Format and auto-fix on save
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*",
   callback = function()
+    vim.lsp.buf.code_action({
+      filter = function(action)
+        return action.isPreferred
+      end,
+      apply = true,
+    })
     vim.lsp.buf.format({ timeout_ms = 2000 })
   end,
 })
@@ -165,7 +171,7 @@ vim.keymap.set('n', '<leader>dD', function()
   })
 end, { desc = 'Workspace diagnostics' })
 
-vim.keymap.set('n', '<leader>dc', vim.diagnostic.open_float, {desc="Diagnostic, current"})
+vim.keymap.set('n', '<leader>dc', vim.diagnostic.open_float, { desc = "Diagnostic, current" })
 
 -- ============================================================================
 -- HARDTIME (MOVEMENT IMPROVEMENT)
