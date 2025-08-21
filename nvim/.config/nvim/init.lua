@@ -35,7 +35,7 @@ vim.keymap.set('n', '<leader>q', ':quit<CR>')
 vim.keymap.set({ 'n', 'v', 'x' }, '<leader>y', '"+y<CR>')
 vim.keymap.set({ 'n', 'v', 'x' }, '<leader>p', '"+p<CR>')
 
-
+vim.opt.termguicolors = true
 -- ============================================================================
 -- PLUGIN INSTALLATION
 -- ============================================================================
@@ -62,11 +62,14 @@ vim.pack.add({
   { src = "https://github.com/nvim-lualine/lualine.nvim" },
   { src = "https://github.com/rose-pine/neovim" },
   { src = "https://github.com/lewis6991/gitsigns.nvim" },
+  { src = "https://github.com/brenoprata10/nvim-highlight-colors" },
 })
 
 -- ============================================================================
--- COLORSCHEMES
+-- COLORS
 -- ============================================================================
+
+require('nvim-highlight-colors').setup({})
 vim.api.nvim_create_user_command("Vague", function()
   vim.o.background = "dark"
   vim.cmd.colorscheme "vague"
@@ -120,12 +123,12 @@ vim.lsp.config("lua_ls",
 )
 
 vim.keymap.set("n", "<leader>bf", vim.lsp.buf.format)
-vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition)
-vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references)
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
-vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation)
-vim.keymap.set("n", "<leader>gt", vim.lsp.buf.type_definition)
+vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+vim.keymap.set("n", "gr", vim.lsp.buf.references)
+vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
+vim.keymap.set("n", "gt", vim.lsp.buf.type_definition)
 
 -- Format and auto-fix on save
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -181,7 +184,7 @@ require("hardtime").setup({})
 -- ============================================================================
 -- SMEAR-CURSOR (CURSOR TRAILING EFFECT)
 -- ============================================================================
-require("smear_cursor").setup()
+-- require("smear_cursor").setup()
 
 -- ============================================================================
 -- LUALINE
@@ -249,7 +252,8 @@ require "auto-session".setup(
 local Terminal = require('toggleterm.terminal').Terminal
 Lazygit        = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
 Term           = Terminal:new({ hidden = true, direction = "float" })
-Claude         = Terminal:new({ cmd = "~/.claude/local/claude --resume || ~/.claude/local/claude", direction = "float" })
+Claude         = Terminal:new({ cmd = "claude --resume || claude", direction = "float" })
+BTOP           = Terminal:new({ cmd = "btop", direction = "float" })
 
 vim.keymap.set({ "n", "t" }, "<leader>tt", "<CMD>lua Term:toggle()<CR>")
 vim.keymap.set({ "n", "t" }, "<leader>tc", "<CMD>lua Claude:toggle()<CR>")
