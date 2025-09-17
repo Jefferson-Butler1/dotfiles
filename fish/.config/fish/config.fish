@@ -9,6 +9,9 @@ set -gx DOTFILES "$HOME/dotfiles"
 set -gx OE "$HOME/OE"
 set -gx HOMEBREW_CASK_OPTS "--no-quarantine"
 set -gx BUN_INSTALL "$HOME/.bun"
+set -gx FISH "$HOME/.config/fish"
+set -gx COMPLETE fish tms | source
+set -gx CLAUDE_OAUTH_TOKEN_2025_9_3 "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"
 
 # PATH additions
 fish_add_path $HOME/.local/bin
@@ -22,6 +25,7 @@ alias vim nvim
 alias ls "eza -lh"
 alias la "eza -lha" 
 alias tree "eza -lh --tree"
+alias sp "ssh-picker"
 alias dc "docker ps --format 'table {{.ID}}\t{{.CreatedAt}}\t{{.Status}}\t{{.Names}}'"
 alias run "mprocs fe be"
 alias fp "ps au | fzf"
