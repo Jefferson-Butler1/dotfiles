@@ -63,6 +63,7 @@ vim.pack.add({
   { src = "https://github.com/rose-pine/neovim" },
   { src = "https://github.com/lewis6991/gitsigns.nvim" },
   { src = "https://github.com/brenoprata10/nvim-highlight-colors" },
+  { src = "https://github.com/stevearc/conform.nvim" },
 })
 
 -- ============================================================================
@@ -109,7 +110,7 @@ require 'nvim-treesitter.configs'.setup {
   highlight = { enable = true, },
 }
 
-vim.lsp.enable({ "lua_ls", "ts_ls" })
+vim.lsp.enable({ "lua_ls", "ts_ls", "bash_ls" })
 vim.lsp.config("lua_ls",
   {
     settings = {
@@ -122,7 +123,9 @@ vim.lsp.config("lua_ls",
   }
 )
 
-vim.keymap.set("n", "<leader>bf", vim.lsp.buf.format)
+vim.keymap.set("n", "<leader>bf", function()
+  require("conform").format({ lsp_format = "fallback" })
+end)
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
@@ -130,18 +133,27 @@ vim.keymap.set("n", "gr", vim.lsp.buf.references)
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
 vim.keymap.set("n", "gt", vim.lsp.buf.type_definition)
 
--- Format and auto-fix on save
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*",
-  callback = function()
-    vim.lsp.buf.code_action({
-      filter = function(action)
-        return action.isPreferred
-      end,
-      apply = true,
-    })
-    vim.lsp.buf.format({ timeout_ms = 2000 })
-  end,
+-- ============================================================================
+-- CONFORM (FORMATTING)
+-- ============================================================================
+require("conform").setup({
+  formatters_by_ft = {
+    javascript = { "eslint_d", "prettierd" },
+    javascriptreact = { "eslint_d", "prettierd" },
+    typescript = { "eslint_d", "prettierd" },
+    typescriptreact = { "eslint_d", "prettierd" },
+    json = { "prettierd" },
+    jsonc = { "prettierd" },
+    css = { "prettierd" },
+    scss = { "prettierd" },
+    html = { "prettierd" },
+    markdown = { "prettierd" },
+  },
+  
+  format_on_save = {
+    timeout_ms = 2000,
+    lsp_format = "fallback",
+  },
 })
 
 -- ============================================================================
