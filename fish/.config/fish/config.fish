@@ -30,7 +30,12 @@ alias dc "docker ps --format 'table {{.ID}}\t{{.CreatedAt}}\t{{.Status}}\t{{.Nam
 alias run "mprocs fe be"
 alias fp "ps au | fzf"
 alias st speedtest
+alias weather "curl wttr.in/mazama?u1FnQt"
+alias source_fish "source ~/.config/fish/config.fish"
+alias source_zsh "source ~/.zshrc"
+alias source_bash "source ~/.bashrc"
 alias upgrade 'brew update && brew upgrade --greedy && brew upgrade --cask --greedy'
+alias tm 'tmux-sessionizer'
 
 # Initialize starship prompt
 if command -v starship >/dev/null
@@ -44,10 +49,16 @@ end
 
 # Bun completions - skip bash completion file, fish has different completion system
 
-# NVM setup - use latest version, .nvmrc files will override per project
-nvm use latest 2>/dev/null
+# NVM setup - .nvmrc files will set version per project
+# nvm use latest 2>/dev/null
 
 # Run create_symlinks.sh script
 if test -f "$SCRIPTS/create_symlinks.sh"
     bash "$SCRIPTS/create_symlinks.sh"
 end
+eval (/opt/homebrew/bin/brew shellenv)
+
+# Added by LM Studio CLI (lms)
+set -gx PATH $PATH /Users/jeff/.lmstudio/bin
+# End of LM Studio CLI section
+zoxide init fish | source
