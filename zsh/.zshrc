@@ -131,6 +131,17 @@ export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
 
 alias usage="while npx ccusage daily --since $(date  +%Y%m%d); do sleep 5; clear; done"
 
-alias claude="/Users/jeff/.claude/local/claude"
 alias upgrade='brew update && brew upgrade --greedy && brew upgrade --cask --greedy'
 export HOMEBREW_CASK_OPTS="--no-quarantine"
+
+# bun completions
+[ -s "/Users/jeff/.bun/_bun" ] && source "/Users/jeff/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/jeff/.lmstudio/bin"
+# End of LM Studio CLI section
+
