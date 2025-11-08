@@ -25,6 +25,14 @@ vim.o.winborder = "rounded"
 vim.o.scrolloff = 50
 vim.g.mapleader = " "
 
+vim.o.cursorline = true
+vim.o.updatetime = 50
+vim.o.timeoutlen = 30
+vim.o.splitbelow = true
+vim.o.splitright = true
+vim.o.clipboard = "unnamedplus"
+vim.o.inccommand = "split"
+
 vim.api.nvim_create_autocmd("TextYankPost", { callback = vim.hl.on_yank })
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
@@ -49,12 +57,11 @@ vim.pack.add({
 	{ src = "https://github.com/saghen/blink.cmp" },
 	{ src = "https://github.com/mason-org/mason.nvim" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
-	{ src = "https://github.com/mason-org/mason.nvim" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/catppuccin/nvim" },
 	{ src = "https://github.com/stevearc/oil.nvim" },
-	{ src = "https://github.com/echasnovski/mini.pick" },
-	{ src = "https://github.com/echasnovski/mini.extra" },
+	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
+	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	{ src = "https://github.com/echasnovski/mini.animate" },
 	{ src = "https://github.com/MunifTanjim/nui.nvim" },
 	-- { src = "https://github.com/m4xshen/hardtime.nvim" },
@@ -69,6 +76,8 @@ vim.pack.add({
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 	{ src = "https://github.com/brenoprata10/nvim-highlight-colors" },
 	{ src = "https://github.com/stevearc/conform.nvim" },
+	{ src = "https://github.com/folke/snacks.nvim" },
+	{ src = "https://github.com/coder/claudecode.nvim" },
 })
 
 -- ============================================================================
@@ -129,15 +138,20 @@ vim.lsp.config("lua_ls", {
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
-vim.keymap.set("n", "gr", vim.lsp.buf.references)
+vim.keymap.set("n", "gr", function()
+	require("telescope.builtin").lsp_references()
+end)
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
 vim.keymap.set("n", "gt", vim.lsp.buf.type_definition)
+vim.keymap.set("n", "K", vim.lsp.buf.hover)
+vim.keymap.set("n", "<leader>ds", vim.lsp.buf.signature_help)
 
 -- ============================================================================
 -- CONFORM (FORMATTING)
 -- ============================================================================
 require("conform").setup({
 	formatters_by_ft = {
+		bash = { "shfmt" },
 		css = { "prettierd" },
 		graphql = { "prettierd" },
 		html = { "prettierd" },
@@ -148,8 +162,9 @@ require("conform").setup({
 		lua = { "stylua" },
 		markdown = { "prettierd" },
 		rust = { "rustfmt" },
-		toml = { "taplo" },
 		scss = { "prettierd" },
+		sh = { "shfmt" },
+		toml = { "taplo" },
 		typescript = { "eslint_d", "prettierd" },
 		typescriptreact = { "eslint_d", "prettierd" },
 	},
@@ -165,31 +180,25 @@ require("conform").setup({
 require("blink.cmp").setup()
 
 -- ============================================================================
--- MINI.PICK (FUZZY FINDER)
+-- TELESCOPE (FUZZY FINDER)
 -- ============================================================================
-require("mini.pick").setup()
-require("mini.extra").setup()
+require("telescope").setup({
+	defaults = {
+		layout_config = {
+			horizontal = { preview_width = 0.55 },
+		},
+	},
+})
+
 require("mini.animate").setup()
 
-vim.keymap.set("n", "<leader>ff", ":Pick files <CR>")
-vim.keymap.set("n", "<leader>h", ":Pick help<CR>")
-vim.keymap.set("n", "<leader>fb", ":Pick buffers<CR>")
-vim.keymap.set("n", "<leader>fg", ":Pick grep_live<CR>")
-
--- Document diagnostics using mini.extra
-vim.keymap.set("n", "<leader>dd", function()
-	require("mini.extra").pickers.diagnostic({
-		scope = "current", -- Show diagnostics for current buffer only
-	})
-end, { desc = "Document diagnostics" })
-
-vim.keymap.set("n", "<leader>da", function()
-	require("mini.extra").pickers.diagnostic({
-		scope = "all", -- Show diagnostics for all buffers
-	})
-end, { desc = "Workspace diagnostics" })
-
-vim.keymap.set("n", "<leader>dc", vim.diagnostic.open_float, { desc = "Diagnostic, current" })
+local builtin = require("telescope.builtin")
+vim.keymap.set("n", "<leader>ff", builtin.find_files)
+vim.keymap.set("n", "<leader>h", builtin.help_tags)
+vim.keymap.set("n", "<leader>fb", builtin.buffers)
+vim.keymap.set("n", "<leader>fg", builtin.live_grep)
+vim.keymap.set("n", "<leader>dd", builtin.diagnostics)
+vim.keymap.set("n", "<leader>dc", vim.diagnostic.open_float)
 
 -- ============================================================================
 -- HARDTIME (MOVEMENT IMPROVEMENT)
@@ -246,7 +255,6 @@ require("auto-session").setup({
 	enabled = true,
 	git_use_branch_name = true,
 	log_level = "error",
-	root_dir = "/Users/jeff/.local/share/nvim/sessions/",
 	session_lens = {
 		buftypes_to_ignore = {},
 		load_on_setup = true,
@@ -255,8 +263,25 @@ require("auto-session").setup({
 		},
 		previewer = false,
 	},
-	suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+	suppressed_dirs = { "~/", "/" },
 })
+
+-- ============================================================================
+-- CLAUDE CODE CONFIGURATION
+-- ============================================================================
+require("claudecode").setup({
+	terminal = {
+		split_side = "right", -- or "left" based on your preference
+		split_width_percentage = 0.50,
+	},
+})
+
+-- Optional: Add keymaps for Claude Code
+vim.keymap.set("n", "<leader>cc", "<cmd>ClaudeCode<cr>", { desc = "Toggle Claude Code" })
+vim.keymap.set("n", "<leader>cf", "<cmd>ClaudeCodeFocus<cr>", { desc = "Focus Claude Code" })
+vim.keymap.set("n", "<C-y>", "<cmd>ClaudeCodeDiffAccept<cr>", { desc = "Accept Claude diff" })
+vim.keymap.set("n", "<C-n>", "<cmd>ClaudeCodeDiffDeny<cr>", { desc = "Deny Claude diff" })
+vim.keymap.set("v", "<leader>cs", "<cmd>ClaudeCodeSend<cr>", { desc = "Send selection to Claude" })
 
 -- ============================================================================
 -- TOGGLE-TERM
@@ -268,7 +293,7 @@ Claude = Terminal:new({ cmd = "claude --resume || claude", direction = "float" }
 BTOP = Terminal:new({ cmd = "btop", direction = "float" })
 
 vim.keymap.set({ "n", "t" }, "<leader>tt", "<CMD>lua Term:toggle()<CR>")
-vim.keymap.set({ "n", "t" }, "<leader>tc", "<CMD>lua Claude:toggle()<CR>")
+vim.keymap.set({ "n", "t" }, "<C-c>", "<CMD>lua Claude:toggle()<CR>")
 vim.keymap.set({ "n", "t" }, "<leader>gg", "<CMD>lua Lazygit:toggle()<CR>")
 
 -- Image preview keymap (only available in image files)
