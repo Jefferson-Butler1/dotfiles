@@ -12,3 +12,5 @@ fish_add_path /Users/jeff/.lmstudio/bin
 
 # macOS-specific aliases
 alias upgrade 'brew update && brew upgrade --greedy && brew upgrade --cask --greedy'
+
+tms --generate fish | source

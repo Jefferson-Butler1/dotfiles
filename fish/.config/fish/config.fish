@@ -17,7 +17,6 @@ set -gx DOTFILES "$HOME/dotfiles"
 set -gx OE "$HOME/OE"
 set -gx BUN_INSTALL "$HOME/.bun"
 set -gx FISH "$HOME/.config/fish"
-tms --generate fish | source
 
 # PATH additions (cross-platform)
 fish_add_path $HOME/.local/bin
