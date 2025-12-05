@@ -25,6 +25,7 @@ macos-titlebar-style = hidden
 font-family = "MesloLGS Nerd Font Mono"
 font-size = 13
 title = ""
+command = fish
 
 # MariaSol
 mouse-hide-while-typing = true

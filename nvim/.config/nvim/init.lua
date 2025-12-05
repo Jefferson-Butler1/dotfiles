@@ -58,13 +58,14 @@ vim.pack.add({
 	{ src = "https://github.com/mason-org/mason.nvim" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
+	{ src = "https://github.com/folke/lazydev.nvim" },
 	{ src = "https://github.com/catppuccin/nvim" },
 	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	{ src = "https://github.com/echasnovski/mini.animate" },
 	{ src = "https://github.com/MunifTanjim/nui.nvim" },
-	-- { src = "https://github.com/m4xshen/hardtime.nvim" },
+	{ src = "https://github.com/m4xshen/hardtime.nvim" },
 	{ src = "https://github.com/rmagatti/auto-session" },
 	{ src = "https://github.com/akinsho/toggleterm.nvim" },
 	{ src = "https://github.com/sphamba/smear-cursor.nvim" },
@@ -78,6 +79,7 @@ vim.pack.add({
 	{ src = "https://github.com/stevearc/conform.nvim" },
 	{ src = "https://github.com/folke/snacks.nvim" },
 	{ src = "https://github.com/coder/claudecode.nvim" },
+	{ src = "https://github.com/mbbill/undotree" },
 })
 
 -- ============================================================================
@@ -118,13 +120,13 @@ vim.keymap.set("n", "<leader>e", ":Oil<CR>")
 -- LSP CONFIGURATION
 -- ============================================================================
 require("mason").setup()
----@diagnostic disable-next-line: missing-fields
+require("lazydev").setup()
 require("nvim-treesitter.configs").setup({
-	ensure_installed = { "typescript", "tsx", "lua", "bash", "rust", "graphql" },
+	ensure_installed = { "typescript", "tsx", "lua", "bash", "rust", "graphql", "yaml" },
 	highlight = { enable = true },
 })
 
-vim.lsp.enable({ "lua_ls", "ts_ls", "bash_ls", "rust_analyzer", "graphql" })
+vim.lsp.enable({ "lua_ls", "ts_ls", "bash_ls", "rust_analyzer", "graphql", "yamlls" })
 vim.lsp.config("lua_ls", {
 	settings = {
 		Lua = {
@@ -138,9 +140,6 @@ vim.lsp.config("lua_ls", {
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
-vim.keymap.set("n", "gr", function()
-	require("telescope.builtin").lsp_references()
-end)
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
 vim.keymap.set("n", "gt", vim.lsp.buf.type_definition)
 vim.keymap.set("n", "K", vim.lsp.buf.hover)
@@ -167,6 +166,7 @@ require("conform").setup({
 		toml = { "taplo" },
 		typescript = { "eslint_d", "prettierd" },
 		typescriptreact = { "eslint_d", "prettierd" },
+		yaml = { "prettierd" },
 	},
 	format_on_save = {
 		lsp_format = "fallback",
@@ -182,17 +182,19 @@ require("blink.cmp").setup()
 -- ============================================================================
 -- TELESCOPE (FUZZY FINDER)
 -- ============================================================================
-require("telescope").setup({
-	defaults = {
-		layout_config = {
-			horizontal = { preview_width = 0.55 },
-		},
-	},
-})
 
 require("mini.animate").setup()
 
 local builtin = require("telescope.builtin")
+
+require("telescope").setup({
+	defaults = {
+		layout_config = {
+			horizontal = { preview_width = 0.66 },
+		},
+	},
+})
+
 vim.keymap.set("n", "<leader>ff", builtin.find_files)
 vim.keymap.set("n", "<leader>h", builtin.help_tags)
 vim.keymap.set("n", "<leader>fb", builtin.buffers)
@@ -203,7 +205,7 @@ vim.keymap.set("n", "<leader>dc", vim.diagnostic.open_float)
 -- ============================================================================
 -- HARDTIME (MOVEMENT IMPROVEMENT)
 -- ============================================================================
--- require("hardtime").setup({})
+require("hardtime").setup({})
 
 -- ============================================================================
 -- SMEAR-CURSOR (CURSOR TRAILING EFFECT)
@@ -310,3 +312,8 @@ vim.api.nvim_create_autocmd("FileType", {
 		end, { buffer = true })
 	end,
 })
+
+-- ============================================================================
+-- UNDOTREE
+-- ============================================================================
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)

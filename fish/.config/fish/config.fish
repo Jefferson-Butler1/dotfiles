@@ -1,9 +1,12 @@
+# Set DOTFILES early so we can use it for sourcing
+set -gx DOTFILES "$HOME/dotfiles"
+
 # Detect OS and source OS-specific configuration
 switch (uname)
     case Darwin
-        source $HOME/.config/fish/config.darwin.fish
+        source $DOTFILES/fish/.config/fish/config.darwin.fish
     case Linux
-        source $HOME/.config/fish/config.linux.fish
+        source $DOTFILES/fish/.config/fish/config.linux.fish
 end
 
 # Environment Variables
@@ -13,7 +16,6 @@ set -gx VISUAL nvim
 set -gx EDITOR nvim
 set -gx NVIMCONF "$HOME/dotfiles/nvim/.config/nvim"
 set -gx SCRIPTS "$HOME/scripts"
-set -gx DOTFILES "$HOME/dotfiles"
 set -gx OE "$HOME/OE"
 set -gx BUN_INSTALL "$HOME/.bun"
 set -gx FISH "$HOME/.config/fish"
