@@ -62,6 +62,8 @@ cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c '$wincmd J'
 [alias]
     # Check if branch needs rebase
     behind = "!git rev-list --left-right --count HEAD...@{u} | cut -f2"
+    # Hard reset to upstream tracking branch
+    gud = "reset --hard @{u}"
 
 [user]
 	name = Jefferson-Butler1
