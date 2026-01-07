@@ -36,6 +36,12 @@ alias weather "curl https://wttr.in/48.69,-122.19"
 alias source_fish "source ~/.config/fish/config.fish"
 alias tm 'tmux-sessionizer'
 
+function sign-lrs-model -a host keyname -d "Sign Ubuntu Core model on remote host"
+    set -q host[1]; or set host 100.90.0.100
+    set -q keyname[1]; or set keyname lrs-image-key
+    ssh -t $host "cd ~/local-tz-server-ts/ubuntu-core-image/config && git pull && snap sign -k $keyname < model.json > model.signed && git add model.signed && git commit -m 'Re-sign model' && git push"
+end
+
 # Initialize starship prompt
 if command -v starship >/dev/null
     starship init fish | source

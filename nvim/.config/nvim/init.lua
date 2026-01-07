@@ -1,17 +1,25 @@
 -- ============================================================================
 -- VIM OPTIONS
 -- ============================================================================
+vim.g.mapleader = " "
+
 vim.o.number = true
 vim.o.relativenumber = true
+vim.o.signcolumn = "yes"
+vim.o.cursorline = true
+vim.o.termguicolors = true
+
 vim.o.wrap = true
+vim.o.linebreak = true
+vim.o.breakindent = true
+vim.o.breakindentopt = "shift:2"
+
 vim.o.expandtab = true
 vim.o.tabstop = 2
 vim.o.softtabstop = 2
 vim.o.shiftwidth = 2
-vim.o.signcolumn = "yes"
 vim.o.autoindent = true
 vim.o.smartindent = true
-vim.o.breakindent = true
 
 vim.o.swapfile = false
 vim.o.undofile = true
@@ -23,9 +31,7 @@ vim.o.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣", extends = "›", precedes = "‹" }
 vim.o.winborder = "rounded"
 vim.o.scrolloff = 50
-vim.g.mapleader = " "
 
-vim.o.cursorline = true
 vim.o.updatetime = 50
 vim.o.timeoutlen = 30
 vim.o.splitbelow = true
@@ -48,7 +54,9 @@ vim.keymap.set({ "n", "v", "x" }, "<C-l>", "<C-w>l")
 vim.keymap.set({ "n", "v", "x" }, "<leader>y", '"+y<CR>')
 vim.keymap.set({ "n", "v", "x" }, "<leader>p", '"+p<CR>')
 
-vim.opt.termguicolors = true
+vim.keymap.set({ "n", "v" }, "j", "gj")
+vim.keymap.set({ "n", "v" }, "k", "gk")
+
 -- ============================================================================
 -- PLUGIN INSTALLATION
 -- ============================================================================
@@ -295,7 +303,7 @@ Claude = Terminal:new({ cmd = "claude --resume || claude", direction = "float" }
 BTOP = Terminal:new({ cmd = "btop", direction = "float" })
 
 vim.keymap.set({ "n", "t" }, "<leader>tt", "<CMD>lua Term:toggle()<CR>")
-vim.keymap.set({ "n", "t" }, "<C-c>", "<CMD>lua Claude:toggle()<CR>")
+-- vim.keymap.set({ "n", "t" }, "<C-c>", "<CMD>lua Claude:toggle()<CR>")
 vim.keymap.set({ "n", "t" }, "<leader>gg", "<CMD>lua Lazygit:toggle()<CR>")
 
 -- Image preview keymap (only available in image files)
