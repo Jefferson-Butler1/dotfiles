@@ -33,7 +33,10 @@ alias dc "docker ps --format 'table {{.ID}}\t{{.CreatedAt}}\t{{.Status}}\t{{.Nam
 alias fp "ps au | fzf"
 alias st speedtest
 alias weather "curl https://wttr.in/48.69,-122.19"
-alias source_fish "source ~/.config/fish/config.fish"
+function source_fish -d "Stow dotfiles and reload fish config"
+    command stow -R -d ~/dotfiles -t ~ fish 2>/dev/null
+    source ~/.config/fish/config.fish
+end
 alias tm 'tmux-sessionizer'
 
 function sign-lrs-model -a host keyname -d "Sign Ubuntu Core model on remote host"

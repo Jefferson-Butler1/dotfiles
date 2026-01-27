@@ -39,6 +39,9 @@ adjust-cursor-thickness = 150%
 cursor-invert-fg-bg = true
 confirm-close-surface = false
 
+# Enable desktop notifications
+desktop-notifications = true
+
 # -= Keybinds =-
 # I want to have a leader based control
 # system for ghostty (to avoid key collissions
