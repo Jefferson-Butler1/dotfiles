@@ -4,7 +4,7 @@
   system.defaults = {
     dock = {
       autohide = true;
-      tilesize = 36;
+      tilesize = 128;
       show-recents = false;
       minimize-to-application = true;
       mru-spaces = false;
@@ -15,7 +15,8 @@
       AppleShowAllExtensions = true;
       ShowPathbar = true;
       ShowStatusBar = true;
-      FXPreferredViewStyle = "Nlsv";
+      AppleShowAllFiles = true;
+      FXPreferredViewStyle = "glyv";
       FXDefaultSearchScope = "SCcf";
     };
 

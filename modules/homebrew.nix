@@ -17,8 +17,6 @@
     casks = [
       "ghostty"
       "claude"
-      "cursor"
-      "zed"
       "google-chrome"
       "raycast"
       "obsidian"
