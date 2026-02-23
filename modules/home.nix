@@ -37,7 +37,7 @@
         # kubernetes
         kubectl
         k9s
-        helm
+        kubernetes-helm
         crane
         kind
         sops
