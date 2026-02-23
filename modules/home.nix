@@ -24,7 +24,7 @@
         fd
         ripgrep
         fzf
-        du-dust
+        dust
         tokei
         cloc
         tldr
