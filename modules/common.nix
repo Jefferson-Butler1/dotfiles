@@ -8,6 +8,7 @@
       show-recents = false;
       minimize-to-application = true;
       mru-spaces = false;
+      orientation = "left";
     };
 
     finder = {
