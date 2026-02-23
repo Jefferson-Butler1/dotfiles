@@ -23,7 +23,7 @@
       "raycast"
       "obsidian"
       "slack"
-      "docker"
+      "docker-desktop"
       "font-meslo-lg-nerd-font"
       "zen"
     ];
