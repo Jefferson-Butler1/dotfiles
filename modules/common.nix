@@ -44,9 +44,9 @@
 
   security.pam.services.sudo_local.touchIdAuth = true;
 
-  system.defaults.alf = {
-    globalstate = 1;
-    stealthenabled = 1;
+  networking.applicationFirewall = {
+    enable = true;
+    enableStealthMode = true;
   };
 
   environment.shells = [ pkgs.fish ];
@@ -57,6 +57,7 @@
     trusted-users = [ "root" "jeff" ];
   };
 
+  system.primaryUser = "jeff";
   system.stateVersion = 6;
   nixpkgs.config.allowUnfree = true;
 }
