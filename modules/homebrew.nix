@@ -12,7 +12,9 @@
 
     taps = [];
 
-    brews = [];
+    brews = [
+      "ollama"
+    ];
 
     casks = [
       "ghostty"
@@ -22,6 +24,7 @@
       "obsidian"
       "slack"
       "docker-desktop"
+      "plex"
       "font-meslo-lg-nerd-font"
       "zen"
     ];
