@@ -1,0 +1,80 @@
+{
+  "global": {
+    "raycastHotkey": "Cmd+Space",
+    "hyperKey": {
+      "enabled": true,
+      "triggerKey": "CapsLock",
+      "modifiers": ["Ctrl", "Option", "Cmd"]
+    }
+  },
+  "windowManagement": {
+    "Shift+Cmd+H": "leftHalf",
+    "Shift+Cmd+L": "rightHalf",
+    "Shift+Cmd+I": "topHalf",
+    "Shift+Cmd+,": "bottomHalf",
+    "Shift+Cmd+U": "topLeftQuarter",
+    "Shift+Cmd+O": "topRightQuarter",
+    "Shift+Cmd+M": "bottomLeftQuarter",
+    "Shift+Cmd+.": "bottomRightQuarter",
+    "Shift+Cmd+G": "maximize",
+    "Shift+Cmd+J": "maximizeAlmost",
+    "Shift+Cmd+F": "toggleFullscreen",
+    "Shift+Cmd+9": "maximizeHeight",
+    "Shift+Cmd+;": "maximizeWidth",
+    "Shift+Cmd+=": "makeLarger",
+    "Shift+Cmd+-": "makeSmaller",
+    "Shift+Cmd+K": "restore",
+    "Shift+Cmd+R": "reasonableSize",
+    "Shift+Cmd+A": "moveLeft",
+    "Shift+Cmd+D": "moveRight",
+    "Shift+Cmd+W": "moveUp",
+    "Shift+Cmd+S": "moveDown",
+    "Shift+Cmd+E": "nextDisplay",
+    "Shift+Cmd+N": "previousDesktop"
+  },
+  "apps": {
+    "Hyper+A": "Ghostty",
+    "Hyper+S": "Slack",
+    "Hyper+D": "Zen Browser",
+    "Hyper+F": "Figma",
+    "Hyper+G": "DREDGE",
+    "Hyper+Z": "Zed",
+    "Hyper+C": "Claude",
+    "Hyper+V": "Discord",
+    "Hyper+N": "Obsidian",
+    "Hyper+M": "Spotify",
+    "Hyper+E": "Mail",
+    "Hyper+I": "Messages",
+    "Hyper+T": "Tailscale",
+    "Hyper+Y": "Yaak",
+    "Hyper+U": "UTM",
+    "Hyper+L": "Plex",
+    "Hyper+P": "Postico",
+    "Hyper+,": "System Settings",
+    "Hyper+Escape": "Quit Applications"
+  },
+  "utilities": {
+    "Shift+Ctrl+P": "clipboardHistory",
+    "Shift+Ctrl+Space": "searchEmoji",
+    "Shift+Ctrl+K": "killProcess",
+    "Shift+Ctrl+E": "ejectAllDisks",
+    "Shift+Ctrl+M": "toggleMenuBar",
+    "Shift+Ctrl+T": "typingPractice",
+    "Shift+Ctrl+,": "raycastExtensions",
+    "Shift+Ctrl+Escape": "quitAllApps"
+  },
+  "brew": {
+    "Shift+Ctrl+S": "search",
+    "Shift+Ctrl+I": "installed",
+    "Shift+Ctrl+O": "outdated",
+    "Shift+Ctrl+U": "upgrade",
+    "Shift+Ctrl+C": "cleanup"
+  },
+  "downloads": {
+    "Shift+Ctrl+D": "showLatestDownload"
+  },
+  "fun": {
+    "Shift+Ctrl+Opt+Cmd+1": "confetti",
+    "Shift+Ctrl+Opt+Cmd+2": "windowBounce"
+  }
+}
