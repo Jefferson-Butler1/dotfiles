@@ -13,11 +13,9 @@
 
     finder = {
       AppleShowAllExtensions = true;
-      ShowPathbar = true;
-      ShowStatusBar = true;
       AppleShowAllFiles = true;
       FXPreferredViewStyle = "glyv";
-      FXDefaultSearchScope = "SCcf";
+      FXDefaultSearchScope = "SCev";
     };
 
     NSGlobalDomain = {
@@ -26,20 +24,27 @@
       AppleShowAllExtensions = true;
       AppleInterfaceStyle = "Dark";
       NSAutomaticSpellingCorrectionEnabled = false;
-      NSAutomaticCapitalizationEnabled = false;
-      NSAutomaticPeriodSubstitutionEnabled = false;
       "com.apple.swipescrolldirection" = true;
     };
 
-    trackpad = {
-      Clicking = true;
-      TrackpadThreeFingerDrag = true;
+    CustomSystemPreferences = {
+      "com.apple.WindowManager" = {
+        HideDesktop = true;
+      };
     };
 
     CustomUserPreferences = {
       "com.apple.desktopservices" = {
         DSDontWriteNetworkStores = true;
         DSDontWriteUSBStores = true;
+      };
+      "com.apple.symbolichotkeys" = {
+        AppleSymbolicHotKeys = {
+          "60" = { enabled = false; value = { parameters = [ 65535 65535 0 ]; type = "standard"; }; };
+          "61" = { enabled = false; value = { parameters = [ 65535 65535 0 ]; type = "standard"; }; };
+          "64" = { enabled = false; value = { parameters = [ 65535 65535 0 ]; type = "standard"; }; };
+          "164" = { enabled = false; value = { parameters = [ 65535 65535 0 ]; type = "standard"; }; };
+        };
       };
     };
   };
