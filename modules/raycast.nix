@@ -129,7 +129,6 @@ in {
 
     configDir = lib.mkOption {
       type = lib.types.str;
-      default = "$HOME/dotfiles/raycast";
       description = "Directory containing .rayconfig exports.";
     };
 
@@ -159,12 +158,15 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    system.activationScripts.postActivation.text = ''
-      sudo -u jeff ${pkgs.fish}/bin/fish ${./raycast/merge-config.fish} \
-        "${overlayFile}" \
-        "${cfg.configDir}" \
-        "${cfg.password}" \
-        "${./raycast/merge.jq}"
+    system.activationScripts.postActivation.text = let
+      user = config.system.primaryUser;
+    in ''
+      sudo -u ${user} --set-home \
+        ${pkgs.fish}/bin/fish ${./raycast/merge-config.fish} \
+          "${overlayFile}" \
+          "${cfg.configDir}" \
+          "${cfg.password}" \
+          "${./raycast/merge.jq}"
     '';
   };
 }

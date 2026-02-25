@@ -15,6 +15,7 @@
   raycast = {
     enable = true;
     password = "12345678";
+    configDir = "/Users/jeff/dotfiles/raycast";
 
     preferences = {
       globalHotkey = "Command-Space";
