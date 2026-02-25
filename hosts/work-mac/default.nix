@@ -12,6 +12,14 @@
   networking.hostName = "work-mac";
   nixpkgs.overlays = [ rust-overlay.overlays.default ];
 
+  launchd.user.agents.prevent-sleep = {
+    serviceConfig = {
+      ProgramArguments = [ "/usr/bin/caffeinate" "-s" ];
+      RunAtLoad = true;
+      KeepAlive = true;
+    };
+  };
+
   raycast = {
     enable = true;
     password = "12345678";
