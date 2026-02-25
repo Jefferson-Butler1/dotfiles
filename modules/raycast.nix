@@ -159,8 +159,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    system.activationScripts.postUserActivation.text = ''
-      ${pkgs.fish}/bin/fish ${./raycast/merge-config.fish} \
+    system.activationScripts.postActivation.text = ''
+      sudo -u jeff ${pkgs.fish}/bin/fish ${./raycast/merge-config.fish} \
         "${overlayFile}" \
         "${cfg.configDir}" \
         "${cfg.password}" \
