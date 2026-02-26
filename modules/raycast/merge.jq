@@ -15,7 +15,10 @@ else . end) |
   ($overlay[0].rootSearch | group_by(.match) |
     map({(.[0].match): .}) | add) as $byMatch |
 
-  # Update existing items (overlay hotkey/type wins, activity preserved)
+  # Hotkeys claimed by the overlay — used to clear conflicts
+  [$overlay[0].rootSearch[].hotkey] as $claimedHotkeys |
+
+  # Update existing items
   .builtin_package_rootSearch.rootSearch = [
     $current[] |
     . as $item |
@@ -24,8 +27,12 @@ else . end) |
       select($item.key | startswith($pfx.key))] | first) as $prefixMatch |
     ($exactMatch // $prefixMatch) as $match |
     if $match then
+      # Overlay match: apply declared hotkey
       . + {hotkey: $match.hotkey} +
       (if $match.type then {type: $match.type} else {} end)
+    elif (.hotkey // null) != null and ($claimedHotkeys | index($item.hotkey)) != null then
+      # No overlay match but hotkey conflicts with an overlay-claimed hotkey: clear it
+      del(.hotkey)
     else . end
   ] |
 
