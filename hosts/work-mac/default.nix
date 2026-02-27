@@ -38,7 +38,7 @@
       "app.zen-browser.zen" = "Control-Option-Command-D";
       "com.figma.Desktop" = "Control-Option-Command-F";
       "com.blacksaltgames.dredge" = "Control-Option-Command-G";
-      "com.apple.weather" = "Control-Option-Command-Z";
+      "dev.zed.Zed" = "Control-Option-Command-Z";
       "com.anthropic.claudefordesktop" = "Control-Option-Command-C";
       "com.hnc.Discord" = "Control-Option-Command-V";
       "md.obsidian" = "Control-Option-Command-N";

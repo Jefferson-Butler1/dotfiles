@@ -80,5 +80,5 @@ set output_path "$config_dir/Raycast $timestamp.rayconfig"
 cp "$tmpdir/output.rayconfig" "$output_path"
 log "Wrote: $output_path"
 
-open -a Raycast
-log "Done — Raycast reopened"
+open "$output_path"
+log "Done — import dialog opened. Enter password to apply."
