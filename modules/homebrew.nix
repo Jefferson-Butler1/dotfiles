@@ -17,6 +17,7 @@
     ];
 
     casks = [
+      "bitwarden"
       "ghostty"
       "claude"
       "google-chrome"
