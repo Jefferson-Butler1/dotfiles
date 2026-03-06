@@ -12,8 +12,8 @@
   networking.hostName = "work-mac";
   nixpkgs.overlays = [ rust-overlay.overlays.default ];
 
-  power.sleep.computer = 0;
-  power.sleep.display = 0;
+  power.sleep.computer = "never";
+  power.sleep.display = "never";
 
   launchd.user.agents.prevent-sleep = {
     serviceConfig = {
