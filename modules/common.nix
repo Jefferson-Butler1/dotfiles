@@ -51,6 +51,8 @@
 
   security.pam.services.sudo_local.touchIdAuth = true;
 
+  environment.systemPath = [ "/opt/homebrew/bin" "/opt/homebrew/sbin" ];
+
   networking.applicationFirewall = {
     enable = true;
     enableStealthMode = true;

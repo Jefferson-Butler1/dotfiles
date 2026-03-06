@@ -25,6 +25,7 @@
       "slack"
       "docker-desktop"
       "plex"
+      "tailscale"
       "font-meslo-lg-nerd-font"
       "zen"
     ];

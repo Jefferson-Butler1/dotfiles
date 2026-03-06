@@ -12,11 +12,27 @@
   networking.hostName = "work-mac";
   nixpkgs.overlays = [ rust-overlay.overlays.default ];
 
+  power.sleep.computer = 0;
+  power.sleep.display = 0;
+
   launchd.user.agents.prevent-sleep = {
     serviceConfig = {
-      ProgramArguments = [ "/usr/bin/caffeinate" "-s" ];
+      ProgramArguments = [ "/usr/bin/caffeinate" "-s" "-i" "-d" ];
       RunAtLoad = true;
       KeepAlive = true;
+    };
+  };
+
+  launchd.user.agents.ollama-server = {
+    serviceConfig = {
+      ProgramArguments = [ "/opt/homebrew/bin/ollama" "serve" ];
+      EnvironmentVariables = {
+        OLLAMA_HOST = "0.0.0.0";
+      };
+      RunAtLoad = true;
+      KeepAlive = true;
+      StandardOutPath = "/tmp/ollama-server.log";
+      StandardErrorPath = "/tmp/ollama-server.log";
     };
   };
 
