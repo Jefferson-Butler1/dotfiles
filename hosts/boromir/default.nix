@@ -23,6 +23,13 @@
     };
   };
 
+  launchd.user.agents.tailscale = {
+    serviceConfig = {
+      ProgramArguments = [ "/usr/bin/open" "-a" "Tailscale" ];
+      RunAtLoad = true;
+    };
+  };
+
   launchd.user.agents.ollama-server = {
     serviceConfig = {
       ProgramArguments = [ "/opt/homebrew/bin/ollama" "serve" ];
