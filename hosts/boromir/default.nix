@@ -9,7 +9,7 @@
     ../../modules/raycast.nix
   ];
 
-  networking.hostName = "work-mac";
+  networking.hostName = "boromir";
   nixpkgs.overlays = [ rust-overlay.overlays.default ];
 
   power.sleep.computer = "never";

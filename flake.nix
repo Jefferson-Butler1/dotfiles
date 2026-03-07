@@ -22,11 +22,11 @@
 
   outputs = { self, nixpkgs, nix-darwin, home-manager, rust-overlay }:
   {
-    darwinConfigurations.work-mac = nix-darwin.lib.darwinSystem {
+    darwinConfigurations.boromir = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       specialArgs = { inherit self rust-overlay; };
       modules = [
-        ./hosts/work-mac
+        ./hosts/boromir
         home-manager.darwinModules.home-manager
       ];
     };
